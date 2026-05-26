@@ -1,6 +1,6 @@
 import Image from "next/image";
-import LoteMap from "../components/Mapa"; 
 import Hero from "../components/Hero"
+import MapaBase from "@/components/Mapa/MapaBase";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
                   />
                   <div>
                     <div className="absolute top-0 left-0 w-full h-full flex">
-                      <LoteMap />
+                      <MapaBase />
                     </div>
                   </div>
                 </div>
@@ -44,7 +44,7 @@ export default function Home() {
                   <span className="w-4 h-4 bg-green-500 rounded-full"></span> Disponible
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-4 h-4 bg-red-500 rounded-full"></span> Reservado
+                  <span className="w-4 h-4 bg-[#DE0000] rounded-full"></span> Reservado
                 </div>
               </div>
             </div>
