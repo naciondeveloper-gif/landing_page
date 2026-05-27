@@ -1,14 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface Lote {
-  id: string | number;
-  numero: string | number;
-  area: string;
-  disponible: boolean;
-  d: string;
-  type: string;
-}
+import { Lote } from '@/types/lote';
 
 interface ModalProps {
   lote: Lote;
