@@ -11,7 +11,6 @@ export default function Navbar() {
 
         <div className="hidden md:flex gap-8 text-gray-700 font-medium">
           <Link href="/" className="hover:text-blue-600">Inicio</Link>
-          <Link href="#proyecto" className="hover:text-blue-600">Proyecto</Link>
           <Link href="#mapa" className="hover:text-blue-600">Mapa Interactivo</Link>
         </div>
 

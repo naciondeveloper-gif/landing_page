@@ -41,10 +41,10 @@ export default function Home() {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-4 h-4 bg-green-500 rounded-full"></span> Disponible
+                  <span className="w-4 h-4 bg-yellow-300 rounded-full"></span> Disponible
                 </div>
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="w-4 h-4 bg-[#DE0000] rounded-full"></span> Reservado
+                  <span className="w-4 h-4 bg-orange-500 rounded-full"></span> Reservado
                 </div>
               </div>
             </div>
