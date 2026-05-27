@@ -4,15 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import Modal from './Modal';
 import { AnimatePresence } from 'framer-motion';
-
-interface Lote {
-  id: string | number;
-  numero: string | number;
-  area: string;
-  disponible: boolean;
-  d: string;
-  type: string;
-}
+import { Lote } from '@/types/lote';
 
 export default function MapaBase() {
   const [lotes, setLotes] = useState<Lote[]>([])
