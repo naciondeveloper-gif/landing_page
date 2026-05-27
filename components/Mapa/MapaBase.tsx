@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { LOTES } from '@/data/lotes';
 import Modal from './Modal';
+import { AnimatePresence } from 'framer-motion';
 
 interface Lote {
   id: string | number;
@@ -39,8 +40,8 @@ export default function MapaBase() {
             d={lote.d}
             className="cursor-pointer transition-all"
             style={{ 
-              fill: lote.type == "lote" ? (lote.disponible ? '#e8eb14' : '#ff0000') : "#ffffff" , 
-              fillOpacity: lote.type == "lote" ? (hoveredLote?.id === lote.id ? 0.6 : 0.3)  : 0
+              fill: lote.type == "lote" ? (lote.disponible ? '#e8eb14' : '#0046DE') : "#ffffff" , 
+              fillOpacity: lote.type == "lote" ? (hoveredLote?.id === lote.id ? 0.6 : 0.4)  : 0
             }}
             onMouseEnter={() => setHoveredLote(lote)}
             onMouseLeave={() => setHoveredLote(null)}
@@ -58,13 +59,16 @@ export default function MapaBase() {
           <p className="text-amber-400 text-xs">{hoveredLote.area}</p>
         </div>
       )}
-      {selectedLote && selectedLote.type == "lote" && selectedLote.disponible === true && (
-        <Modal 
-          isOpen={true} 
-          lote={selectedLote} 
-          onClose={() => setSelectedLote(null)} 
-        />
-      )}
+      <AnimatePresence>
+        {selectedLote && selectedLote.type == "lote" && selectedLote.disponible === true && (
+          <Modal 
+            isOpen={true} 
+            lote={selectedLote} 
+            onClose={() => setSelectedLote(null)} 
+          />
+        )}
+      </AnimatePresence>
+      
     </div>
   );
 }

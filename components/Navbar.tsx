@@ -5,7 +5,7 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
-        <div className="text-2xl font-bold text-blue-900 text-center">
+        <div className="text-md font-bold text-blue-900 text-center md:text-2xl">
           Consorcio Neptuno
         </div>
 
@@ -16,7 +16,7 @@ export default function Navbar() {
 
         <Link 
           href="/login" 
-          className="bg-blue-900 text-white px-6 py-2.5 rounded-full hover:bg-blue-800 transition-colors font-semibold text-center" 
+          className="bg-blue-900 text-white px-4 py-2.5 rounded-full hover:bg-blue-800 transition-colors text-xs font-semibold text-center md:text-[14px]" 
         >Iniciar Sesión
         </Link>
       </div>
