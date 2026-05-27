@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
-import { LOTES } from '@/data/lotes';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 import Modal from './Modal';
 import { AnimatePresence } from 'framer-motion';
 
@@ -15,10 +15,27 @@ interface Lote {
 }
 
 export default function MapaBase() {
+  const [lotes, setLotes] = useState<Lote[]>([])
   const [selectedLote, setSelectedLote] = useState<Lote | null>(null);
   const [hoveredLote, setHoveredLote] = useState<Lote | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  useEffect(() => {
+    async function fetchLotes() {
+      const { data, error } = await supabase
+        .from('lotes')
+        .select('*');
+
+      if (error) {
+        console.error("Error al traer los lotes:", error);
+      } else {
+        setLotes(data || []);
+      }
+    }
+    fetchLotes();
+  }, []);
+
+  
   return (
     <div className="relative w-full">
       <Image 
@@ -34,14 +51,14 @@ export default function MapaBase() {
         className="absolute top-0 left-0 w-full h-full"
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       >
-        {LOTES.map((lote) => (
+        {lotes.map((lote: Lote) => (
           <path
             key={lote.id}
             d={lote.d}
             className="cursor-pointer transition-all"
             style={{ 
-              fill: lote.type == "lote" ? (lote.disponible ? '#e8eb14' : '#0046DE') : "#ffffff" , 
-              fillOpacity: lote.type == "lote" ? (hoveredLote?.id === lote.id ? 0.6 : 0.4)  : 0
+              fill: lote.type == "lote" ? (lote.disponible ? '#e8eb1400' : '#0046DE') : "#ffffff" , 
+              fillOpacity: lote.type == "lote" ? (hoveredLote?.id === lote.id ? 0.6 : 0.7)  : 0
             }}
             onMouseEnter={() => setHoveredLote(lote)}
             onMouseLeave={() => setHoveredLote(null)}
