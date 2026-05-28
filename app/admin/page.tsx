@@ -43,7 +43,6 @@ export default function AdminPage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         
-        {/* Cabecera del Panel */}
         <div className="bg-blue-950 p-6 text-white flex justify-between items-center">
           <div>
             <h1 className="text-2xl font-bold">Panel de Administración</h1>
@@ -54,7 +53,6 @@ export default function AdminPage() {
           </div>
         </div>
 
-        {/* Tabla de Lotes */}
         <div className="overflow-x-auto p-6">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -68,7 +66,7 @@ export default function AdminPage() {
             </thead>
             <tbody>
               {lotes.map((lote) => {
-                if (lote.type !== 'lote') return null; // Ignoramos parques o áreas comunes
+                if (lote.type !== 'lote') return null;
                 
                 return (
                   <tr key={lote.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
