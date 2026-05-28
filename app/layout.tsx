@@ -20,7 +20,7 @@ export default function RootLayout({
       <link rel="icon" type="image/png" href="/icon-neptuno.jpeg"></link>
       <body className={`${inter.className} bg-gray-50`}>
         <Navbar />
-        <main className="pt-20">
+        <main>
           {children}
         </main>
       </body>
