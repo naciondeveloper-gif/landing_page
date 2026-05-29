@@ -1,10 +1,12 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [mensaje, setMensaje] = useState("");
+    const router = useRouter();
 
     const handleLogin = async (e: React.FormEvent) =>{
         e.preventDefault();
@@ -19,10 +21,14 @@ export default function LoginPage() {
 
             const request = await res.json();
 
-            if(res.ok) {
-                setMensaje("Con acceso")
+            if (res.ok) {
+              console.log("Login exitoso, guardando sesión...");
+              localStorage.setItem("isLoggedIn", "true");
+              setTimeout(() => {
+                router.push("/admin");
+              }, 100);
             } else {
-                setMensaje("No se pudo ingresar")
+              setMensaje("No se pudo ingresar");
             }
         } catch (error) {
             setMensaje("Error con el servidor")

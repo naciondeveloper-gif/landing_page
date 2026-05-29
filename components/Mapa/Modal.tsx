@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lote } from '@/types/lote';
@@ -9,34 +10,43 @@ interface ModalProps {
 }
 
 export default function Modal({ lote, isOpen, onClose }: ModalProps) {
-  const [formData, setFormData] = useState({
-    nombre: '',
-    telefono: '',
-    correo: '',
-    mensaje: ''
-  });
-  
+  const [formData, setFormData] = useState({ nombre: '', telefono: '', correo: '', mensaje: '' });
   const [enviado, setEnviado] = useState(false);
+  const [cargando, setCargando] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ 
-      ...formData, 
-      [e.target.name]: e.target.value 
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    console.log("Datos listos para enviar:", formData);
-    console.log("Lote de interés:", lote.numero);
-    setEnviado(true);
+    setCargando(true);
 
-    setTimeout(() => {
-      setEnviado(false);
-      setFormData({ nombre: '', telefono: '', correo: '', mensaje: '' });
-      onClose();
-    }, 3000);
+    try {
+      const res = await fetch('/api/lotes/reserve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          loteId: lote.id,
+          ...formData
+        })
+      });
+
+      if (!res.ok) throw new Error("Error en la reserva");
+
+      setEnviado(true);
+      setTimeout(() => {
+        setEnviado(false);
+        setFormData({ nombre: '', telefono: '', correo: '', mensaje: '' });
+        onClose();
+        // Recargar la página para que el mapa se actualice y bloquee el lote
+        window.location.reload(); 
+      }, 2000);
+    } catch (error) {
+      alert("Hubo un error al registrar la reserva. Intenta de nuevo.");
+    } finally {
+      setCargando(false);
+    }
   };
 
   return (
@@ -146,4 +156,5 @@ export default function Modal({ lote, isOpen, onClose }: ModalProps) {
             )}
           </motion.div>
         </motion.div>
-      )}
+  );
+}
