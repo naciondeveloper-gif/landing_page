@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react";
+import { useState } from "react";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ export default function LoginPage() {
         try {
             const res = await fetch("/api/login", {
                 method: "POST",
-                headers: {"Content-Type": "apliccation/json"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({username, password})
             });
 

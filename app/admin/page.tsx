@@ -1,24 +1,48 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Lote } from '@/types/lote';
 
 export default function AdminPage() {
   const [lotes, setLotes] = useState<Lote[]>([]);
-  const [cargando, setCargando] = useState(true);
+  const [verificando, setVerificando] = useState(true); 
+  const router = useRouter();
 
   const fetchLotes = async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('lotes')
       .select('*')
       .order('numero', { ascending: true });
     
     if (data) setLotes(data);
-    setCargando(false);
+    setVerificando(false); 
   };
 
   useEffect(() => {
-    fetchLotes();
+    const estaLogueado = localStorage.getItem("isLoggedIn");
+    
+    if (!estaLogueado) {
+      router.push('/login');
+      return;
+    }
+    const cargarDatos = async () => {
+      try {
+        const { data } = await supabase
+          .from('lotes')
+          .select('*')
+          .order('numero', { ascending: true });
+        
+        if (data) setLotes(data);
+      } catch (error) {
+        console.error("Error al cargar:", error);
+      } finally {
+        setVerificando(false); 
+      }
+    };
+
+    cargarDatos();
+  // eslint-disable-next-line
   }, []);
 
   const toggleDisponibilidad = async (id: string | number, estadoActual: boolean) => {
@@ -28,15 +52,13 @@ export default function AdminPage() {
       .eq('id', id);
 
     if (error) {
-      console.error("Error al actualizar:", error);
       alert("Hubo un error al cambiar el estado.");
     } else {
       fetchLotes();
     }
   };
-
-  if (cargando) {
-    return <div className="p-10 text-center font-bold text-gray-500">Cargando panel...</div>;
+  if (verificando) {
+    return <div className="p-10 text-center text-gray-500">Cargando sistema...</div>;
   }
 
   return (

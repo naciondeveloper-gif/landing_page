@@ -23,13 +23,24 @@ export async function POST(request: Request){
 
         const passwordTrue = password === userAdmin.password;
 
-        if(passwordTrue){
+        if(!passwordTrue){
             return NextResponse.json(
                 {error: "Contraseña incorrecta"},
                 {status: 401}
             )
         }
+        return NextResponse.json(
+            {
+                mensaje: "Autenticación correcta"},
+                {status: 200
+            }
+        );
     } catch (error) {
-        
+        console.log(error)
+        return NextResponse.json(
+            {
+                mensaje: "Error en el servidor"},
+                {status: 500}
+        )
     }
 }
