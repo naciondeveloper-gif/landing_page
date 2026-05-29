@@ -19,7 +19,6 @@ export default function RootLayout({
     <html lang="es">
       <link rel="icon" type="image/png" href="/icon-neptuno.jpeg"></link>
       <body className={`${inter.className} bg-gray-50`}>
-        <Navbar />
         <main>
           {children}
         </main>

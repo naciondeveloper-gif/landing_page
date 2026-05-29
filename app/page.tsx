@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Hero from "../components/Hero"
 import MapaBase from "@/components/Mapa/MapaBase";
+import Nav from "../components/Navbar"
 
 export default function Home() {
   return (
     <div>
+      <Nav></Nav>
       <Hero></Hero>
       <section id="mapa" className="py-24 bg-gray-100">
         <div className="max-w-7xl mx-auto px-6">
