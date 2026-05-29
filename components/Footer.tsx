@@ -17,7 +17,7 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-4">Contacto</h3>
           <p className="text-sm text-blue-200">WhatsApp: +51 924 888 889</p>
-          <p className="text-sm text-blue-200">informes@consorcioneptuno.com</p>
+          <p className="text-sm text-blue-200">informes@consorcioneptuno.com </p>
         </div>
       </div>
       
