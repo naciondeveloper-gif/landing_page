@@ -1,7 +1,7 @@
 import Link from 'next/link';
 export default function Hero() {
   return (
-    <section id="#inicio" className="relative w-full h-[50vh] flex items-center justify-center bg-slate-900 text-white overflow-hidden mt-20">
+    <section className="relative w-full h-[50vh] flex items-center justify-center bg-slate-900 text-white overflow-hidden mt-20">
       <div className="absolute inset-0 bg-[url('/terrenos.png')] bg-cover bg-center opacity-40"></div>
       <div className="relative z-10 text-center px-4">
         <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight mb-6 flex flex-col justify-center">

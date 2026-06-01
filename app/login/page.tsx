@@ -19,18 +19,17 @@ export default function LoginPage() {
                 body: JSON.stringify({username, password})
             });
 
-            const request = await res.json();
+            const data = await res.json();
 
             if (res.ok) {
-              console.log("Login exitoso, guardando sesión...");
+              localStorage.setItem("user", JSON.stringify(data.usuario));
               localStorage.setItem("isLoggedIn", "true");
-              setTimeout(() => {
-                router.push("/admin");
-              }, 100);
+              router.push("/admin");
             } else {
-              setMensaje("No se pudo ingresar");
+              setMensaje(data.error || "No se pudo ingresar");
             }
         } catch (error) {
+            console.error(error)
             setMensaje("Error con el servidor")
         }
     }

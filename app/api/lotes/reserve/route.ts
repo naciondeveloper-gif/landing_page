@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { sendMail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
@@ -14,13 +15,31 @@ export async function POST(request: Request) {
     const expireDate = new Date();
     expireDate.setHours(expireDate.getHours() + 19);
 
-    await supabase
+    const { error: errorLote } = await supabase
       .from('lotes')
       .update({ disponible: false, reservado_hasta: expireDate.toISOString() })
       .eq('id', loteId);
 
+    if (errorLote) throw errorLote;
+
+    try {
+      await sendMail({
+        subject: 'Nueva reserva de lote',
+        text: `Se ha registrado una nueva reserva de lote.
+
+          Lote ID: ${loteId}
+          Nombre: ${nombre}
+          Teléfono: ${telefono}
+          Correo: ${correo || 'No proporcionado'}
+          Mensaje: ${mensaje || 'Ninguno'}`,
+      });
+    } catch (emailError) {
+      console.error('Error enviando email de notificación:', emailError);
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error(error)
     return NextResponse.json({ error: "Error" }, { status: 500 });
   }
 }

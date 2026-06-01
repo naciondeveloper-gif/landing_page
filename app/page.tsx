@@ -2,10 +2,11 @@ import Image from "next/image";
 import Hero from "../components/Hero"
 import MapaBase from "@/components/Mapa/MapaBase";
 import Nav from "../components/Navbar"
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <div id="#inicio" >
       <Nav></Nav>
       <Hero></Hero>
       <section id="mapa" className="py-24 bg-gray-100">
@@ -53,6 +54,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+        <Footer />
     </div>
   );
 }

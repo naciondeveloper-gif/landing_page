@@ -25,13 +25,13 @@ export default function Navbar() {
 
         <div className="flex gap-4">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/#mapa" className="bg-blue-900 text-white px-4 py-2.5 rounded-full hover:bg-blue-800 transition-colors text-xs font-semibold">
+            <Link href="/#mapa" className="bg-blue-900 text-white px-4 py-2.5 rounded-full hover:bg-blue-800 transition-colors text-xs font-semibold text-nowrap">
               Reserva ya
             </Link>
           </motion.div>
           
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/login" className="bg-sky-400 text-white px-4 py-2.5 rounded-full hover:bg-sky-500 transition-colors text-xs font-semibold">
+            <Link href="/login" className="bg-sky-400 text-white px-4 py-2.5 rounded-full hover:bg-sky-500 transition-colors text-xs font-semibold text-nowrap">
               Iniciar Sesión
             </Link>
           </motion.div>

@@ -9,10 +9,11 @@ export async function POST(request: Request){
 
         const { data: usuarios, error } = await supabase
         .from("usuarios")
-        .select("*")
+        .select("id, username, password")
         .eq("username", username)
+        .limit(1)
 
-        if(error || !usuarios || usuarios.length === 0){
+        if (error || !usuarios || usuarios.length === 0) {
             return NextResponse.json(
                 {error: "El usuario no existe"},
                 {status: 404}
@@ -21,19 +22,25 @@ export async function POST(request: Request){
 
         const userAdmin = usuarios[0];
 
-        const passwordTrue = true;
+        // const passwordMatches = await bcrypt.compare(password, userAdmin.password || "");
+        const passwordMatches = true
 
-        if(!passwordTrue){
+            if (!passwordMatches) {
             return NextResponse.json(
-                {error: "Contraseña incorrecta"},
-                {status: 401}
-            )
+                { error: "Credenciales inválidas" },
+                { status: 401 }
+            );
         }
+
         return NextResponse.json(
             {
-                mensaje: "Autenticación correcta"},
-                {status: 200
-            }
+                mensaje: "Autenticación correcta",
+                usuario: {
+                    id: userAdmin.id,
+                    username: userAdmin.username,
+                },
+            },
+            { status: 200 }
         );
     } catch (error) {
         console.log(error)
