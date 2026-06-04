@@ -22,8 +22,7 @@ export async function POST(request: Request){
 
         const userAdmin = usuarios[0];
 
-        // const passwordMatches = await bcrypt.compare(password, userAdmin.password || "");
-        const passwordMatches = true
+        const passwordMatches = await bcrypt.compare(password, userAdmin.password || "");
 
             if (!passwordMatches) {
             return NextResponse.json(

@@ -16,7 +16,7 @@ export default function MapaBase() {
     const ahora = new Date().toISOString();
     await supabase
       .from('lotes')
-      .update({ disponible: true, reservado_hasta: null })
+      .update({ disponible: true, estado: 'disponible', reservado_hasta: null })
       .lt('reservado_hasta', ahora);
 
     const { data, error } = await supabase.from('lotes').select('*');
@@ -55,6 +55,7 @@ export default function MapaBase() {
 
       {hoveredLote && (
         <div className="fixed z-50 bg-blue-950 text-white px-4 py-2 rounded-lg shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-12" style={{ left: mousePos.x, top: mousePos.y }}>
+          <p className="text-white/60 text-xs">Mz. {hoveredLote.mz}</p>
           <p className="font-bold text-sm">Lote {hoveredLote.numero}</p>
           <p className="text-amber-400 text-xs">{hoveredLote.area}</p>
         </div>

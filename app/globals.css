@@ -1,17 +1,133 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #713d1cff;
+@theme {
+  /* ── Paleta clara (inverso del Stitch dark) ── */
+  --color-background:                 #f8f9fc;
+  --color-surface:                    #ffffff;
+  --color-surface-dim:                #dfe2eb;
+  --color-surface-bright:             #f8f9fc;
+  --color-surface-container-lowest:   #ffffff;
+  --color-surface-container-low:      #f0f3fa;
+  --color-surface-container:          #F3F4EA;
+  --color-surface-container-high:     #e4e7ef;
+  --color-surface-container-highest:  #dcdfe8;
+  --color-surface-variant:            #dfe2eb;
+  --color-surface-tint:               #3d5297;
+  --color-on-surface:                 #1a1c21;
+  --color-on-surface-variant:         #44474e;
+  --color-outline:                    #74777f;
+  --color-outline-variant:            #c4c6cf;
+
+  /* Azul marino profundo (primario) */
+  --color-primary:                    #1e3a8a;
+  --color-on-primary:                 #ffffff;
+  --color-primary-container:          #EBF7F7;
+  --color-on-primary-container:       #EBF7F7;
+  --color-inverse-primary:            #b5c5fd;
+
+  /* Oro/ámbar oscuro (secundario) — legible sobre blanco */
+  --color-secondary:                  #b8870b;
+  --color-on-secondary:               #ffffff;
+  --color-secondary-container:        #fff3cd;
+  --color-on-secondary-container:     #3c2f00;
+  --color-secondary-fixed:            #ffe082;
+  --color-secondary-fixed-dim:        #e9c349;
+  --color-on-secondary-fixed:         #241a00;
+
+  --color-tertiary:                   #8a6914;
+  --color-on-tertiary:                #ffffff;
+  --color-tertiary-container:         #ffdf9a;
+  --color-tertiary-fixed:             #ffdf9a;
+
+  --color-error:                      #ba1a1a;
+  --color-on-error:                   #ffffff;
+  --color-error-container:            #ffdad6;
+
+  /* ── Espaciado ── */
+  --spacing-container-max:  1200px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile:  16px;
+  --spacing-gutter:         24px;
+
+  /* ── Tipografía ── */
+  --font-sans: 'Manrope', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #f8f9fc;
+  color: #1a1c21;
+  font-family: 'Manrope', sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ── Escala tipográfica Stitch ── */
+.text-display-lg {
+  font-size: 48px; line-height: 56px;
+  letter-spacing: -0.02em; font-weight: 800;
+}
+.text-headline-lg {
+  font-size: 32px; line-height: 40px; font-weight: 700;
+}
+.text-headline-lg-mobile {
+  font-size: 24px; line-height: 32px; font-weight: 700;
+}
+.text-title-sm {
+  font-size: 16px; line-height: 24px; font-weight: 400;
+}
+.text-title-md {
+  font-size: 20px; line-height: 28px; font-weight: 600;
+}
+.text-body-lg {
+  font-size: 18px; line-height: 28px; font-weight: 400;
+}
+.text-body-md {
+  font-size: 16px; line-height: 24px; font-weight: 400;
+}
+.text-label-caps {
+  font-size: 12px; line-height: 16px;
+  letter-spacing: 0.1em; font-weight: 700; text-transform: uppercase;
+}
+
+/* ── Efectos claros ── */
+
+/* Brillo dorado — igual en ambos temas */
+.gold-glow {
+  box-shadow: 0 0 24px rgba(184, 135, 11, 0.18);
+}
+
+/* Glass card — versión clara */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(184, 135, 11, 0.18);
+  box-shadow: 0 4px 24px rgba(30, 58, 138, 0.07);
+}
+
+/* Hero: gradiente crema de izquierda a transparente */
+.hero-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(248, 249, 252, 0.94) 0%,
+    rgba(248, 249, 252, 0.55) 45%,
+    rgba(248, 249, 252, 0.08) 60%
+  );
+}
+
+.military-gradient {
+  background: linear-gradient(135deg, #ffde83 0%, #f8f9fc 100%);
+}
+
+/* Botón WhatsApp — sin cambios */
+.whatsapp-gradient {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
 }

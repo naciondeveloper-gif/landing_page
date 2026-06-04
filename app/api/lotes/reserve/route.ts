@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     const { error: errorLote } = await supabase
       .from('lotes')
-      .update({ disponible: false, reservado_hasta: expireDate.toISOString() })
+      .update({ disponible: false, estado: 'separado', reservado_hasta: expireDate.toISOString() })
       .eq('id', loteId);
 
     if (errorLote) throw errorLote;
