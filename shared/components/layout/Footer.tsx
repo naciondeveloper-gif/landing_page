@@ -1,3 +1,5 @@
+import { waLink, EMAIL, WHATSAPP_DISPLAY, DIRECCION } from '@/config/contacto';
+
 export default function Footer() {
   return (
     <footer id="contacto" className="w-full bg-linear-20 to-surface-tint/30 from-on-secondary border-t border-outline-variant/10">
@@ -11,7 +13,7 @@ export default function Footer() {
           Tu nuevo hogar en Chavín de Huántar te espera. Consulta disponibilidad y planes de financiamiento preferenciales.
         </p>
         <a
-          href="https://wa.me/51924888889?text=Hola,%20quiero%20información%20sobre%20Chavín%20de%20Huántar"
+          href={waLink('Hola, quiero información sobre Chavín de Huántar')}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 whatsapp-gradient px-8 py-4 rounded-xl text-title-md text-white hover:opacity-90 transition-all gold-glow group"
@@ -29,9 +31,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-4 space-y-6">
             <div className="flex items-center gap-4">
-              <img src="/stitch/fovime-logo.png"  alt="FOVIME" className="h-10 w-auto opacity-90" />
+              <img src="/fovime-logo.png"  alt="FOVIME" className="h-10 w-auto opacity-90" />
               <div className="w-px h-8 bg-outline-variant" />
-              <img src="/stitch/neptuno-logo.png" alt="Consorcio Neptuno" className="h-10 w-auto opacity-90" />
+              <img src="/neptuno-logo.png" alt="Consorcio Neptuno" className="h-10 w-auto opacity-90" />
             </div>
             <p className="text-body-md text-on-surface-variant leading-relaxed">
               Chavín de Huántar es un conjunto residencial ubicado en el KM 52 Panamericana Sur — Chilca. Un proyecto exclusivo de Consorcio Neptuno y FOVIME para la familia militar peruana.
@@ -70,9 +72,9 @@ export default function Footer() {
             <h3 className="text-title-md text-on-surface mb-6 uppercase tracking-wider">Contacto Directo</h3>
             <div className="space-y-4">
               {[
-                { icon: 'location_on', title: 'Ubicación',          content: 'KM 52 Pan. Sur – Chilca, Lima', href: undefined },
-                { icon: 'mail',        title: 'Correo',             content: 'informes@consorcioneptuno.com',       href: 'mailto:informes@consorcioneptuno.com' },
-                { icon: 'phone_iphone',title: 'Teléfono / WhatsApp',content: '924 888 889',                        href: 'https://wa.me/51924888889' },
+                { icon: 'location_on',  title: 'Ubicación',           content: DIRECCION,          href: undefined },
+                { icon: 'mail',         title: 'Correo',              content: EMAIL,               href: `mailto:${EMAIL}` },
+                { icon: 'phone_iphone', title: 'Teléfono / WhatsApp', content: WHATSAPP_DISPLAY,    href: waLink() },
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-4">
                   <span className="material-symbols-outlined text-secondary mt-1">{item.icon}</span>

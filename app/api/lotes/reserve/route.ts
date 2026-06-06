@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
-import { sendMail } from "@/lib/mail";
+import { supabase } from "@/lib/supabase/client";
+import { sendMail } from "@/lib/mail/transport";
+import { reservaAdminHtml, reservaClienteHtml, reservaText } from "@/lib/mail/templates/reserva";
+import type { ReservaEmailData } from "@/lib/mail/templates/reserva";
 
 export async function POST(request: Request) {
   try {
     const { loteId, nombre, telefono, correo, mensaje } = await request.json();
+
+    const { data: loteData } = await supabase
+      .from('lotes')
+      .select('mz, numero, area')
+      .eq('id', loteId)
+      .limit(1);
+
+    const lote = loteData?.[0]; 
 
     const { error: errorReserva } = await supabase
       .from('reservaciones')
@@ -13,7 +23,7 @@ export async function POST(request: Request) {
     if (errorReserva) throw errorReserva;
 
     const expireDate = new Date();
-    expireDate.setHours(expireDate.getHours() + 19);
+    expireDate.setHours(expireDate.getHours() + 24);
 
     const { error: errorLote } = await supabase
       .from('lotes')
@@ -22,24 +32,44 @@ export async function POST(request: Request) {
 
     if (errorLote) throw errorLote;
 
-    try {
-      await sendMail({
-        subject: 'Nueva reserva de lote',
-        text: `Se ha registrado una nueva reserva de lote.
+    const emailData: ReservaEmailData = {
+      loteId,
+      mz: lote?.mz,
+      numero: lote?.numero,
+      area: lote?.area,
+      nombre,
+      telefono,
+      correo,
+      mensaje,
+    };
 
-          Lote ID: ${loteId}
-          Nombre: ${nombre}
-          Teléfono: ${telefono}
-          Correo: ${correo || 'No proporcionado'}
-          Mensaje: ${mensaje || 'Ninguno'}`,
-      });
-    } catch (emailError) {
-      console.error('Error enviando email de notificación:', emailError);
+    const loteLabel = `Mz. ${lote?.mz ?? ''} Lote ${lote?.numero ?? loteId}`;
+
+    const envios = [
+      sendMail({
+        subject: `Nueva reserva — ${loteLabel}`,
+        text: reservaText(emailData, 'reserva'),
+        html: reservaAdminHtml(emailData, 'reserva'),
+      }),
+    ];
+
+    if (correo?.trim()) {
+      envios.push(sendMail({
+        to: correo.trim(),
+        subject: `Tu separación fue registrada — ${loteLabel}`,
+        text: `Hola ${nombre}, hemos recibido tu solicitud. Nos pondremos en contacto pronto.`,
+        html: reservaClienteHtml(emailData),
+      }));
     }
+
+    const resultados = await Promise.allSettled(envios);
+    resultados.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[correo ${i === 0 ? 'admin' : 'cliente'}]`, r.reason);
+    });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: "Error" }, { status: 500 });
+    console.error(error);
+    return NextResponse.json({ error: "Error al registrar la reserva" }, { status: 500 });
   }
 }

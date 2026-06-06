@@ -1,3 +1,5 @@
+import { waLink } from '@/config/contacto';
+
 const specs = [
   { icon: 'home',         label: 'Tipo de Vivienda',  value: 'Casa + Lote — 1 piso' },
   { icon: 'king_bed',     label: 'Habitaciones',      value: '2 dormitorios' },
@@ -5,7 +7,6 @@ const specs = [
   { icon: 'square_foot',  label: 'Área de Terreno',   value: '90 m²' },
   { icon: 'architecture', label: 'Área Techada',      value: '35 m²' },
   { icon: 'apartment',    label: 'Total de Lotes',    value: '304 unidades' },
-  { icon: 'map',          label: 'Extensión Total',   value: '44,933 m²' },
 ];
 
 export default function Brochure() {
@@ -65,15 +66,12 @@ export default function Brochure() {
             </div>
 
             <a
-              href="https://wa.me/51924888889?text=Hola,%20quiero%20más%20información%20sobre%20el%20proyecto%20Chavín%20de%20Huántar"
+              href={waLink('Hola, quiero más información sobre el proyecto Chavín de Huántar')}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full whatsapp-gradient text-white font-bold py-4 rounded-xl transition-opacity hover:opacity-90 text-title-md"
             >
-              <span
-                className="material-symbols-outlined"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                 chat
               </span>
               Solicitar información por WhatsApp

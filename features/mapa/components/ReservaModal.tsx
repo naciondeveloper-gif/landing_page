@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Lote } from '@/types/lote';
+import type { Lote } from '@/types/lote';
 
 interface ModalProps {
   lote: Lote;
@@ -9,7 +9,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export default function Modal({ lote, onClose }: ModalProps) {
+export default function ReservaModal({ lote, onClose }: ModalProps) {
   const [formData, setFormData] = useState({ nombre: '', telefono: '', correo: '', mensaje: '' });
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
@@ -118,24 +118,14 @@ export default function Modal({ lote, onClose }: ModalProps) {
               <span className="material-symbols-outlined text-amber-400 text-base">square_foot</span>
               <span className="text-white text-sm font-medium">{lote.area}</span>
             </div>
-            <div
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 ${
-                lote.disponible ? 'bg-green-500/20' : 'bg-red-500/20'
-              }`}
-            >
+            <div className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 ${lote.disponible ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
               <span
-                className={`material-symbols-outlined text-base ${
-                  lote.disponible ? 'text-green-400' : 'text-red-400'
-                }`}
+                className={`material-symbols-outlined text-base ${lote.disponible ? 'text-green-400' : 'text-red-400'}`}
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
                 {lote.disponible ? 'check_circle' : 'cancel'}
               </span>
-              <span
-                className={`text-sm font-medium ${
-                  lote.disponible ? 'text-green-300' : 'text-red-300'
-                }`}
-              >
+              <span className={`text-sm font-medium ${lote.disponible ? 'text-green-300' : 'text-red-300'}`}>
                 {lote.disponible ? 'Disponible' : 'No disponible'}
               </span>
             </div>
@@ -148,10 +138,7 @@ export default function Modal({ lote, onClose }: ModalProps) {
             enviado ? (
               <div className="py-6 text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span
-                    className="material-symbols-outlined text-green-600 text-4xl"
-                    style={{ fontVariationSettings: "'FILL' 1" }}
-                  >
+                  <span className="material-symbols-outlined text-green-600 text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                     check_circle
                   </span>
                 </div>
@@ -208,8 +195,7 @@ export default function Modal({ lote, onClose }: ModalProps) {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Correo{' '}
-                      <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+                      Correo <span className="text-gray-400 font-normal text-xs">(opcional)</span>
                     </label>
                     <input
                       type="email"
@@ -230,8 +216,7 @@ export default function Modal({ lote, onClose }: ModalProps) {
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">
-                    Mensaje{' '}
-                    <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+                    Mensaje <span className="text-gray-400 font-normal text-xs">(opcional)</span>
                   </label>
                   <textarea
                     name="mensaje"
@@ -250,19 +235,12 @@ export default function Modal({ lote, onClose }: ModalProps) {
                 >
                   {cargando ? (
                     <>
-                      <span className="material-symbols-outlined text-base animate-spin">
-                        progress_activity
-                      </span>
+                      <span className="material-symbols-outlined text-base animate-spin">progress_activity</span>
                       Enviando...
                     </>
                   ) : (
                     <>
-                      <span
-                        className="material-symbols-outlined text-base"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        send
-                      </span>
+                      <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>send</span>
                       Solicitar información
                     </>
                   )}
@@ -272,17 +250,13 @@ export default function Modal({ lote, onClose }: ModalProps) {
           ) : (
             <div className="text-center py-6">
               <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span
-                  className="material-symbols-outlined text-red-500 text-4xl"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
+                <span className="material-symbols-outlined text-red-500 text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                   lock
                 </span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Lote no disponible</h3>
               <p className="text-gray-500 text-sm">
-                El Lote {lote.numero} de Mz. {lote.mz} ya fue vendido o está en proceso de
-                separación.
+                El Lote {lote.numero} de Mz. {lote.mz} ya fue vendido o está en proceso de separación.
               </p>
               <button
                 onClick={onClose}

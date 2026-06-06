@@ -1,10 +1,11 @@
 "use client";
 import { motion } from 'framer-motion';
+import { waLink } from '@/config/contacto';
 
 export default function WhatsAppButton() {
   return (
     <motion.a
-      href="https://wa.me/51924888889?text=Hola,%20me%20interesa%20información%20sobre%20el%20proyecto%20Chavín%20de%20Huántar"
+      href={waLink('Hola, me interesa información sobre el proyecto Chavín de Huántar')}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

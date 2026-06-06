@@ -40,7 +40,7 @@ export default function ConoceMas() {
             <div className="absolute -inset-4 bg-secondary/10 rounded-2xl blur-2xl" />
             <div className="relative overflow-hidden rounded-2xl border border-secondary/30 shadow-2xl aspect-video group">
               <img
-                src="/stitch/gated-entry.jpg"
+                src="/gated-entry.jpg"
                 alt="Entrada Conjunto Residencial Chavín de Huántar"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
