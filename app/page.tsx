@@ -40,7 +40,7 @@ export default function Home() {
                   Click para saber más
                 </div>
                 <div className="relative w-full max-w-4xl">
-                  <Image src="/plano.svg" alt="Plano" width={3178} height={4460} className="w-full" />
+                  <Image src="/plano.jpg" alt="Plano" width={3178} height={4460} className="w-full" />
                   <div>
                     <div className="absolute top-0 left-0 w-full h-full flex">
                       <MapaBase />
