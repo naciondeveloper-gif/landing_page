@@ -19,10 +19,7 @@ function AmenidadCard({ icon, label }: { icon: string; label: string }) {
   return (
     <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:bg-white/20 hover:border-secondary/60 transition-all group cursor-default">
       <div className="w-12 h-12 rounded-xl bg-secondary/20 border border-secondary/40 flex items-center justify-center group-hover:scale-110 transition-transform">
-        <span
-          className="material-symbols-outlined text-secondary text-2xl"
-          style={{ fontVariationSettings: "'FILL' 1" }}
-        >
+        <span className="material-symbols-outlined text-secondary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
           {icon}
         </span>
       </div>
@@ -35,7 +32,7 @@ export default function Amenidades() {
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img src="/stitch/detalles-bg.jpg" alt="" className="w-full h-full object-cover" />
+        <img src="/detalles-bg.jpg" alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-primary/88" />
       </div>
 
@@ -49,7 +46,6 @@ export default function Amenidades() {
         </div>
 
         <div className="space-y-12">
-          {/* En tu hogar */}
           <div>
             <div className="flex items-center gap-3 mb-6">
               <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>home</span>
@@ -61,7 +57,6 @@ export default function Amenidades() {
             </div>
           </div>
 
-          {/* En el condominio */}
           <div>
             <div className="flex items-center gap-3 mb-6">
               <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>apartment</span>

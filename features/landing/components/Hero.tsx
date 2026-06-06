@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { waLink } from '@/config/contacto';
 
 export default function Hero() {
   return (
@@ -43,7 +44,7 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Benefits — se dice una sola vez, aquí con fuerza */}
+          {/* Benefits */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               { icon: 'description', label: 'Título de propiedad registrado' },
@@ -69,7 +70,7 @@ export default function Hero() {
               <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
             <a
-              href="https://wa.me/51924888889?text=Hola,%20me%20interesa%20el%20proyecto%20Chav%C3%ADn%20de%20Hu%C3%A1ntar"
+              href={waLink('Hola, me interesa el proyecto Chavín de Huántar')}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#25D366] text-white px-8 py-4 rounded-lg text-title-md hover:brightness-110 transition-all flex items-center gap-2 active:scale-95"
@@ -80,7 +81,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* ── Right: price card — único lugar en la página con m² y precio ── */}
+        {/* ── Right: price card ── */}
         <motion.div
           className="md:col-span-5 flex justify-center md:justify-end"
           initial={{ x: 50, opacity: 0 }}

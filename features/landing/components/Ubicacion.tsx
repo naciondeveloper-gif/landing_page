@@ -10,7 +10,7 @@ export default function Ubicacion() {
 
       <div className="w-full h-[400px] relative overflow-hidden">
         <img
-          src="/stitch/map-chincha.jpg"
+          src="/map-chincha.jpg"
           alt="Mapa Chilca – KM 52 Panamericana Sur"
           className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 hover:opacity-80 transition-all duration-500"
         />

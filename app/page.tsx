@@ -1,17 +1,18 @@
 import Image from "next/image";
-import Nav          from "@/components/Navbar";
-import Hero         from "@/components/Hero";
-import SocialProof  from "@/components/SocialProof";
-import Caracteristicas from "@/components/Caracteristicas";
-import SobreProyecto   from "@/components/SobreProyecto";
-import ConoceMas    from "@/components/ConoceMas";
-import Amenidades   from "@/components/Amenidades";
-import Brochure     from "@/components/Brochure";
-import Ubicacion    from "@/components/Ubicacion";
-import FAQ          from "@/components/FAQ";
-import Footer       from "@/components/Footer";
-import WhatsAppButton  from "@/components/WhatsAppButton";
-import MapaBase     from "@/components/Mapa/MapaBase";
+import { waLink } from "@/config/contacto";
+import Nav          from "@/shared/components/layout/Navbar";
+import Hero         from "@/features/landing/components/Hero";
+import SocialProof  from "@/features/landing/components/SocialProof";
+import Caracteristicas from "@/features/landing/components/Caracteristicas";
+import SobreProyecto   from "@/features/landing/components/SobreProyecto";
+import ConoceMas    from "@/features/landing/components/ConoceMas";
+import Amenidades   from "@/features/landing/components/Amenidades";
+import Brochure     from "@/features/landing/components/Brochure";
+import Ubicacion    from "@/features/landing/components/Ubicacion";
+import FAQ          from "@/features/landing/components/FAQ";
+import Footer       from "@/shared/components/layout/Footer";
+import WhatsAppButton  from "@/features/landing/components/WhatsAppButton";
+import MapaBase     from "@/features/mapa/components/MapaBase";
 
 export default function Home() {
   return (
@@ -39,7 +40,7 @@ export default function Home() {
                   Click para saber más
                 </div>
                 <div className="relative w-full max-w-4xl">
-                  <Image src="/plano.jpg" alt="Plano" width={3178} height={4460} className="w-full" />
+                  <Image src="/plano.svg" alt="Plano" width={3178} height={4460} className="w-full" />
                   <div>
                     <div className="absolute top-0 left-0 w-full h-full flex">
                       <MapaBase />
@@ -64,7 +65,7 @@ export default function Home() {
                 </div>
               </div>
               <a
-                href="https://wa.me/51924888889?text=Hola,%20quiero%20información%20sobre%20un%20lote%20en%20Chavín%20de%20Huántar"
+                href={waLink('Hola, quiero información sobre un lote en Chavín de Huántar')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full whatsapp-gradient text-white font-bold py-3 rounded-xl transition-opacity hover:opacity-90 text-body-md"

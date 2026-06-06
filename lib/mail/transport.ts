@@ -4,17 +4,15 @@ const host = process.env.SMTP_HOST;
 const port = process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined;
 const user = process.env.SMTP_USER;
 const pass = process.env.SMTP_PASSWORD;
-const from = process.env.SMTP_FROM || user;
-const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
+
+export const from = process.env.SMTP_FROM || user;
+export const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
 
 const transporter = nodemailer.createTransport({
   host,
   port,
   secure: port === 465,
-  auth: {
-    user,
-    pass,
-  },
+  auth: { user, pass },
 });
 
 export async function sendMail({
@@ -28,21 +26,8 @@ export async function sendMail({
   html?: string;
   to?: string;
 }) {
-  if (!transporter) {
-    throw new Error('Transporte de correo no está configurado.');
-  }
-
   if (!host || !port || !user || !pass || !from || !adminEmail) {
     throw new Error('Configuración de correo incompleta. Revisa las variables de entorno SMTP.');
   }
-
-  const mailOptions = {
-    from,
-    to: to || adminEmail,
-    subject,
-    text,
-    html,
-  };
-
-  return transporter.sendMail(mailOptions);
+  return transporter.sendMail({ from, to: to || adminEmail, subject, text, html });
 }
