@@ -15,8 +15,6 @@ export default function MapaBase() {
 
   return (
     <div className="relative w-full">
-      <Image src="/plano.jpg" alt="Plano" width={1588} height={2245.3333} className="w-full h-auto" priority />
-
       <svg
         viewBox="0 0 1588 2245.3333"
         className="absolute top-0 left-0 w-full h-full"
@@ -30,7 +28,7 @@ export default function MapaBase() {
               className="cursor-pointer transition-all"
               style={{
                 fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1400' : '#0046DE') : '#ffffff',
-                fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 1,
+                fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 0,
               }}
               transform='matrix(0,-0.16,-0.16,0,1588,2245.3333)'
               onMouseEnter={() => setHoveredLote(lote)}
