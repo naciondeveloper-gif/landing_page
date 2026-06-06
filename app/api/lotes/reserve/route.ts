@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       .eq('id', loteId)
       .limit(1);
 
-    const lote = loteData?.[0];
+    const lote = loteData?.[0]; 
 
     const { error: errorReserva } = await supabase
       .from('reservaciones')
