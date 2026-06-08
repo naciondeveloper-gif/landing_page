@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: '%s – Chavín de Huántar',
   },
   description:
-    'Lotes y casas desde S/.138,000 en Chilca, Lima. Proyecto exclusivo para la familia militar peruana. Título de propiedad, agua, desagüe y financiamiento preferencial FOVIME. KM 52 Panamericana Sur.',
+    'Lotes y casas desde S/.130,900 en Chilca, Lima. Proyecto exclusivo para la familia militar peruana. Título de propiedad, agua, desagüe y financiamiento preferencial FOVIME. KM 52 Panamericana Sur.',
   keywords: [
     'lotes Chilca',
     'casas familia militar',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Chavín de Huántar | Tu nuevo hogar en Chilca',
     description:
-      'Lotes + Casas desde S/.138,000. Exclusivo para la familia militar peruana. Financiamiento FOVIME. KM 52 Panamericana Sur – Chilca, Lima.',
+      'Lotes + Casas desde S/.130,900. Exclusivo para la familia militar peruana. Financiamiento FOVIME. KM 52 Panamericana Sur – Chilca, Lima.',
     url: BASE_URL,
     type: 'website',
     locale: 'es_PE',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Chavín de Huántar | Lotes y Casas desde S/.138,000',
+    title: 'Chavín de Huántar | Lotes y Casas desde S/.130,900',
     description:
       'Proyecto exclusivo para la familia militar. Financiamiento preferencial FOVIME. Chilca, Lima.',
     images: ['/hero-bg.jpg'],
