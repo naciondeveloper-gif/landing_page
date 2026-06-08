@@ -18,9 +18,8 @@ export async function getAdminSession(): Promise<AdminSession | null> {
 
   const { data: sessionRow } = await supabase
     .from('sessions')
-    .select('user_id, expires_at')
+    .select('user_id')
     .eq('id', session.value)
-    .gt('expires_at', new Date().toISOString())
     .limit(1);
 
   const row = sessionRow?.[0];

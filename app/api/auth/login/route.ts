@@ -39,11 +39,10 @@ export async function POST(request: Request) {
     }
 
     const sessionId = randomUUID();
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
     const { error: sessionError } = await supabase
       .from('sessions')
-      .insert({ id: sessionId, user_id: Number(userAdmin.id), expires_at: expiresAt.toISOString() });
+      .insert({ id: sessionId, user_id: Number(userAdmin.id), expires_at: '2099-12-31T23:59:59Z' });
 
     if (sessionError) throw sessionError;
 
@@ -56,7 +55,6 @@ export async function POST(request: Request) {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 24,
       path: '/',
     });
 

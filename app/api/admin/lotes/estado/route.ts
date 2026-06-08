@@ -15,6 +15,7 @@ interface CompradorBody {
 }
 
 export async function POST(request: Request) {
+  try {
   const admin = await getAdminSession();
   if (!admin) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
@@ -58,10 +59,6 @@ export async function POST(request: Request) {
     disponible: nuevoEstado === 'disponible',
     reservado_hasta: null,
   };
-
-  if (nuevoEstado === 'separado') {
-    updates.reservado_hasta = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
-  }
 
   const { error: errorLote } = await supabase
     .from('lotes')
@@ -127,4 +124,8 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('[POST /api/admin/lotes/estado]', err);
+    return NextResponse.json({ error: 'Error en el servidor' }, { status: 500 });
+  }
 }
