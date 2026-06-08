@@ -35,6 +35,8 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('user', JSON.stringify(data.usuario));
         router.push("/admin");
       } else {
         setError(data.error || "Credenciales inválidas. Verifica tu usuario y contraseña.");
