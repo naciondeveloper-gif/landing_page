@@ -12,8 +12,8 @@ export function useAdminLotes() {
   const [lotes, setLotes] = useState<Lote[]>([]);
   const [cargando, setCargando] = useState(true);
 
-  const fetchDatos = async () => {
-    setCargando(true);
+  const fetchDatos = async (showLoading = true) => {
+    if (showLoading) setCargando(true);
     try {
       const { data, error } = await supabase
         .from('lotes')
@@ -27,11 +27,16 @@ export function useAdminLotes() {
     } catch (err) {
       console.error('Error al cargar datos:', err);
     } finally {
-      setCargando(false);
+      if (showLoading) setCargando(false);
     }
   };
 
-  useEffect(() => { fetchDatos(); }, []);
+  useEffect(() => {
+    fetchDatos();
+    const interval = setInterval(() => fetchDatos(false), 30_000);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const cambiarEstado = async (lote: Lote, nuevoEstado: EstadoLote, comprador?: CompradorData) => {
     if (nuevoEstado === 'disponible') {

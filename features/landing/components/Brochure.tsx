@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import { waLink } from '@/config/contacto';
+import { generateFichaTecnicaPDF } from '@/lib/utils/generateFichaTecnicaPDF';
 
 const specs = [
   { icon: 'home',         label: 'Tipo de Vivienda',  value: 'Casa + Lote — 1 piso' },
@@ -10,6 +14,17 @@ const specs = [
 ];
 
 export default function Brochure() {
+  const [downloading, setDownloading] = useState(false);
+
+  async function handleDownload() {
+    setDownloading(true);
+    try {
+      await generateFichaTecnicaPDF();
+    } finally {
+      setDownloading(false);
+    }
+  }
+
   return (
     <section className="py-24 bg-surface">
       <div className="max-w-container-max mx-auto px-4 md:px-16">
@@ -59,11 +74,22 @@ export default function Brochure() {
 
             <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-6 mb-6">
               <p className="text-label-caps text-secondary mb-1">Precio desde</p>
-              <p className="text-[42px] leading-none font-extrabold text-secondary mb-2">S/ 138,000</p>
+              <p className="text-[42px] leading-none font-extrabold text-secondary mb-2">S/ 130,900</p>
               <p className="text-body-md text-on-surface-variant">
                 Precio base: Lote + Casa de 1 piso. Crédito preferencial FOVIME disponible.
               </p>
             </div>
+
+            <button
+              onClick={handleDownload}
+              disabled={downloading}
+              className="flex items-center justify-center gap-2 w-full bg-primary text-white font-bold py-4 rounded-xl transition-opacity hover:opacity-90 text-title-md mb-3 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                {downloading ? 'hourglass_top' : 'download'}
+              </span>
+              {downloading ? 'Generando PDF…' : 'Descargar Ficha Técnica (PDF)'}
+            </button>
 
             <a
               href={waLink('Hola, quiero más información sobre el proyecto Chavín de Huántar')}

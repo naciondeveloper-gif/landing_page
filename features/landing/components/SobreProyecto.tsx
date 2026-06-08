@@ -6,7 +6,7 @@ export default function SobreProyecto() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
         {/* Image */}
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl h-80 md:h-[460px]">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl h-80 md:h-115">
           <Image
             src="/house.jpg"
             alt="Conjunto Residencial Chavín de Huántar"
@@ -14,7 +14,7 @@ export default function SobreProyecto() {
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-blue-950/90 to-transparent p-6">
+          <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-blue-950/90 to-transparent p-6">
             <p className="text-white font-bold text-lg">Conjunto Residencial Chavín de Huántar</p>
             <p className="text-blue-200 text-sm">KM 52 Panamericana Sur – Chilca, Lima</p>
           </div>

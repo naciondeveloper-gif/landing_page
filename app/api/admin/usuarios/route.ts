@@ -1,25 +1,10 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import { supabase } from '@/lib/supabase/client';
-
-async function verificarAdmin() {
-  const cookieStore = await cookies();
-  const session = cookieStore.get('session');
-  if (!session?.value) return false;
-
-  const { data, error } = await supabase
-    .from('usuarios')
-    .select('rol')
-    .eq('id', session.value)
-    .limit(1);
-
-  if (error) console.error('[verificarAdmin] Supabase error:', error.message);
-
-  return data?.[0]?.rol === 'administrador';
-}
+import { getAdminSession } from '@/lib/auth/session';
 
 export async function GET() {
-  if (!(await verificarAdmin())) {
+  const admin = await getAdminSession();
+  if (!admin) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
   }
 
@@ -34,16 +19,15 @@ export async function GET() {
 }
 
 export async function DELETE(request: Request) {
-  const cookieStore = await cookies();
-  const session = cookieStore.get('session');
-
-  if (!(await verificarAdmin())) {
+  const admin = await getAdminSession();
+  if (!admin) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
   }
 
   const { id } = await request.json();
 
-  if (String(id) === String(session?.value)) {
+  // Prevent self-deletion by comparing user IDs (not session tokens)
+  if (String(id) === admin.id) {
     return NextResponse.json({ error: 'No puedes eliminar tu propia cuenta' }, { status: 400 });
   }
 

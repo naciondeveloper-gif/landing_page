@@ -1,65 +1,58 @@
 import { NextResponse } from 'next/server';
+import { randomUUID } from 'crypto';
 import bcrypt from 'bcryptjs';
 import { supabase } from '@/lib/supabase/client';
-
-interface Usuario {
-  id: string | number;
-  username: string;
-  password: string;
-  rol: string; 
-}
+import { checkRateLimit } from '@/lib/utils/rateLimit';
 
 export async function POST(request: Request) {
   try {
-    const { username, password } = await request.json();
+    const ip = request.headers.get('x-forwarded-for') ?? 'unknown';
+    const { allowed, retryAfter } = checkRateLimit(`login:${ip}`);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Demasiados intentos. Intenta de nuevo más tarde.' },
+        { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+      );
+    }
 
-    let { data: usuarios, error } = await supabase
+    const { username, password } = await request.json();
+    if (!username || !password) {
+      return NextResponse.json({ error: 'Credenciales requeridas' }, { status: 400 });
+    }
+
+    const { data: usuarios, error } = await supabase
       .from('usuarios')
       .select('id, username, password, rol')
       .eq('username', username)
       .limit(1);
 
-    if (error) {
-      const { data: fallbackData, error: fallbackError } = await supabase
-        .from('usuarios')
-        .select('id, username, password')
-        .eq('username', username)
-        .limit(1);
+    if (error) throw error;
 
-      if (fallbackError || !fallbackData || fallbackData.length === 0) {
-        return NextResponse.json({ error: 'El usuario no existe' }, { status: 404 });
-      }
+    const userAdmin = usuarios?.[0];
+    // Always run bcrypt to prevent timing attacks revealing valid usernames
+    const passwordMatches = userAdmin
+      ? await bcrypt.compare(password, userAdmin.password || '')
+      : await bcrypt.compare(password, '$2b$12$invalidhashpaddinginvalidhash00');
 
-      usuarios = fallbackData.map((user) => ({
-        ...user,
-        rol: 'administrador',
-      }));
-    }
-
-    if (!usuarios || usuarios.length === 0) {
-      return NextResponse.json({ error: 'El usuario no existe' }, { status: 404 });
-    }
-
-    const userAdmin = usuarios[0];
-    const passwordMatches = await bcrypt.compare(password, userAdmin.password || '');
-
-    if (!passwordMatches) {
+    if (!userAdmin || !passwordMatches || userAdmin.rol !== 'administrador') {
       return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
     }
 
+    const sessionId = randomUUID();
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+    const { error: sessionError } = await supabase
+      .from('sessions')
+      .insert({ id: sessionId, user_id: Number(userAdmin.id), expires_at: expiresAt.toISOString() });
+
+    if (sessionError) throw sessionError;
+
     const response = NextResponse.json(
-      {
-        mensaje: 'Autenticación correcta',
-        usuario: { 
-          id: userAdmin.id, 
-          username: userAdmin.username, 
-          rol: userAdmin.rol 
-        },
-      },
+      { mensaje: 'Autenticación correcta', usuario: { username: userAdmin.username, rol: userAdmin.rol } },
       { status: 200 }
     );
 
-    response.cookies.set('session', String(userAdmin.id), {
+    response.cookies.set('session', sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
@@ -69,7 +62,7 @@ export async function POST(request: Request) {
 
     return response;
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ mensaje: 'Error en el servidor' }, { status: 500 });
+    console.error('[login]', error);
+    return NextResponse.json({ error: 'Error en el servidor' }, { status: 500 });
   }
 }

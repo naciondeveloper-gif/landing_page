@@ -17,6 +17,7 @@ export interface Lote {
   area: string;
   disponible: boolean;
   estado: EstadoLote;
+  precio: number;
   d: string;
   type: string;
   reservado_hasta: string | null;

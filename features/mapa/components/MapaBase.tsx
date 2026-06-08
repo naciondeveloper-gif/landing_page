@@ -21,15 +21,20 @@ export default function MapaBase() {
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       >
         <g>
-          {lotes.map((lote: Lote) => (
-            lote.d === "m 845.12859,121.70396 c 0.22663,1.58645 10.42529,44.64744 10.42529,44.64744 l -70.25741,15.86458 -9.97201,-42.83435 c 0,0 51.44655,-24.25014 69.80413,-17.67767 z" ? 
+          {lotes.map((lote: Lote) => {
+          const d = lote.d.trim();
+          const sinTransform =
+            d === "m 845.12859,121.70396 c 0.22663,1.58645 10.42529,44.64744 10.42529,44.64744 l -70.25741,15.86458 -9.97201,-42.83435 c 0,0 51.44655,-24.25014 69.80413,-17.67767 z" ||
+            d === "m 374.77436,580.96359 6.88,29.6 -73.92,17.28 -7.04,-29.6 74.08,-17.28";
+          return (sinTransform
+            ?
             <path
               key={lote.id}
-              d={lote.d}
+              d={d}
               className="cursor-pointer transition-all"
               style={{
-                fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1400' : '#0046DE') : '#ffffff',
-                fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 0,
+                fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1450' : '#0046DE') : '#ffdf20',
+                fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 0.4
               }}
               onMouseEnter={() => setHoveredLote(lote)}
               onMouseLeave={() => setHoveredLote(null)}
@@ -37,10 +42,10 @@ export default function MapaBase() {
             /> :
             <path
               key={lote.id}
-              d={lote.d}
+              d={d}
               className="cursor-pointer transition-all"
               style={{
-                fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1400' : '#0046DE') : '#ffffff',
+                fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1450' : '#0046DE') : '#ffffff',
                 fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 0,
               }}
               transform='matrix(0,-0.16,-0.16,0,1588,2245.3333)'
@@ -48,7 +53,8 @@ export default function MapaBase() {
               onMouseLeave={() => setHoveredLote(null)}
               onClick={() => lote.disponible && setSelectedLote(lote)}
             />
-          ))}
+          );
+        })}
         </g>
       </svg>
 

@@ -7,6 +7,17 @@ function estadoLote(lote: Lote): EstadoLote {
   return lote.estado ?? (lote.disponible ? 'disponible' : 'separado');
 }
 
+function formatFechaLima(iso: string): string {
+  return new Date(iso).toLocaleString('es-PE', {
+    timeZone: 'America/Lima',
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
 function useTiempoRestante(reservado_hasta: string | null) {
   const [restante, setRestante] = useState('');
 
@@ -87,6 +98,7 @@ export default function ReservasTable({ lotes, onRefresh, onEditEstado }: Props)
                 <th className="px-4 py-3 text-left font-semibold">Lote</th>
                 <th className="px-4 py-3 text-left font-semibold">Cliente</th>
                 <th className="px-4 py-3 text-left font-semibold">Contacto</th>
+                <th className="px-4 py-3 text-left font-semibold">Registrado</th>
                 <th className="px-4 py-3 text-left font-semibold">Tiempo restante</th>
                 <th className="px-4 py-3 text-right font-semibold">Acción</th>
               </tr>
@@ -94,7 +106,7 @@ export default function ReservasTable({ lotes, onRefresh, onEditEstado }: Props)
             <tbody className="divide-y divide-gray-50">
               {separados.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-gray-400 text-sm">
+                  <td colSpan={6} className="px-4 py-8 text-center text-gray-400 text-sm">
                     No hay separaciones activas.
                   </td>
                 </tr>
@@ -123,6 +135,9 @@ export default function ReservasTable({ lotes, onRefresh, onEditEstado }: Props)
                         ) : (
                           <span className="text-xs text-gray-300">—</span>
                         )}
+                      </td>
+                      <td className="px-4 py-3 text-xs text-gray-500">
+                        {res?.created_at ? formatFechaLima(res.created_at) : '—'}
                       </td>
                       <td className="px-4 py-3">
                         <CuentaRegresiva reservado_hasta={lote.reservado_hasta} />

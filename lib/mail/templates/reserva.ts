@@ -1,13 +1,28 @@
+import { escapeHtml } from '@/lib/utils/sanitize';
+
 export interface ReservaEmailData {
   loteId: string | number;
   mz?: string;
   numero?: string | number;
   area?: string;
+  precio?: string;
   nombre: string;
   telefono: string;
   correo?: string;
   mensaje?: string;
   adminUser?: string;
+  fechaRegistro?: string;
+}
+
+function fechaLima(): string {
+  return new Date().toLocaleString('es-PE', {
+    timeZone: 'America/Lima',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 export type TipoEvento = 'reserva' | 'separado' | 'vendido';
@@ -64,28 +79,29 @@ export function reservaAdminHtml(data: ReservaEmailData, tipo: TipoEvento = 'res
     separado: {
       badge: 'SEPARADO', badgeColor: '#f59e0b',
       titulo: 'Lote Marcado como Separado',
-      subtitulo: `Registrado manualmente por <strong>${data.adminUser ?? 'admin'}</strong>.`,
+      subtitulo: `Registrado manualmente por <strong>${escapeHtml(data.adminUser ?? 'admin')}</strong>.`,
     },
     vendido:  {
       badge: 'VENDIDO', badgeColor: '#16a34a',
       titulo: '¡Venta de Lote Registrada!',
-      subtitulo: `Venta registrada por <strong>${data.adminUser ?? 'admin'}</strong>.`,
+      subtitulo: `Venta registrada por <strong>${escapeHtml(data.adminUser ?? 'admin')}</strong>.`,
     },
   };
 
   const cfg = configs[tipo];
 
   const loteFilas = [
-    data.mz     ? fila('Manzana', `Mz. ${data.mz}`)       : '',
-    data.numero ? fila('Lote N°', String(data.numero))     : fila('Lote ID', String(data.loteId)),
-    data.area   ? fila('Área',    data.area)               : '',
+    data.mz     ? fila('Manzana', `Mz. ${escapeHtml(data.mz)}`)       : '',
+    data.numero ? fila('Lote N°', escapeHtml(String(data.numero)))     : fila('Lote ID', escapeHtml(String(data.loteId))),
+    data.area   ? fila('Área',    escapeHtml(data.area))               : '',
   ].join('');
 
   const clienteFilas = [
-    fila('Nombre',   data.nombre),
-    fila('Teléfono', data.telefono),
-    data.correo  ? fila('Correo',   data.correo)  : '',
-    data.mensaje ? fila('Mensaje',  data.mensaje) : '',
+    fila('Nombre',   escapeHtml(data.nombre)),
+    fila('Teléfono', escapeHtml(data.telefono)),
+    data.correo  ? fila('Correo',   escapeHtml(data.correo))  : '',
+    data.mensaje ? fila('Mensaje',  escapeHtml(data.mensaje)) : '',
+    fila('Fecha (Lima)', escapeHtml(data.fechaRegistro ?? fechaLima())),
   ].join('');
 
   const contenido = `
@@ -102,19 +118,20 @@ export function reservaAdminHtml(data: ReservaEmailData, tipo: TipoEvento = 'res
 
 export function reservaClienteHtml(data: ReservaEmailData): string {
   const loteLabel = data.mz && data.numero
-    ? `Mz. ${data.mz} — Lote N° ${data.numero}${data.area ? ` (${data.area})` : ''}`
-    : `Lote ID ${data.loteId}`;
+    ? `Mz. ${escapeHtml(data.mz)} — Lote N° ${escapeHtml(String(data.numero))}${data.area ? ` (${escapeHtml(data.area)})` : ''}`
+    : `Lote ID ${escapeHtml(String(data.loteId))}`;
 
   const loteFilas = [
-    data.mz     ? fila('Manzana', `Mz. ${data.mz}`)   : '',
-    data.numero ? fila('Lote N°', String(data.numero)) : fila('ID', String(data.loteId)),
-    data.area   ? fila('Área',    data.area)           : '',
+    data.mz     ? fila('Manzana', `Mz. ${escapeHtml(data.mz)}`)   : '',
+    data.numero ? fila('Lote N°', escapeHtml(String(data.numero))) : fila('ID', escapeHtml(String(data.loteId))),
+    data.area   ? fila('Área',    escapeHtml(data.area))           : '',
+    data.precio ? fila('Precio',  escapeHtml(data.precio))         : '',
   ].join('');
 
   const contenido = `
     <h2 style="margin:0 0 6px;font-size:20px;color:#0d1f4e;font-weight:700;">¡Tu separación fue registrada!</h2>
     <p style="margin:0 0 24px;font-size:14px;color:#6b7280;line-height:1.5;">
-      Hola <strong style="color:#111827;">${data.nombre}</strong>, hemos recibido tu solicitud para el <strong style="color:#111827;">${loteLabel}</strong>.
+      Hola <strong style="color:#111827;">${escapeHtml(data.nombre)}</strong>, hemos recibido tu solicitud para el <strong style="color:#111827;">${loteLabel}</strong>.
       Uno de nuestros asesores se pondrá en contacto contigo a la brevedad.
     </p>
 

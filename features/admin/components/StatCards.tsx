@@ -23,7 +23,7 @@ export default function StatCards({ conteo }: Props) {
               </div>
               <div>
                 <p className="text-2xl font-bold text-gray-800">{n}</p>
-                <p className="text-xs text-gray-400">{cfg.label}</p>
+                <p className="text-[10px] md:text-xs text-gray-400">{cfg.label}</p>
               </div>
             </div>
           </div>

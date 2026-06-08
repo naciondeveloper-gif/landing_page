@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/limpiar-expirados",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}
