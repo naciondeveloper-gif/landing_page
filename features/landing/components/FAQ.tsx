@@ -4,7 +4,7 @@ import { useState } from 'react';
 const faqs = [
   {
     q: '¿Cuál es el precio de los lotes y casas?',
-    a: 'Los lotes con casa arrancan desde S/. 138,000. El precio puede variar según la ubicación del lote dentro del conjunto residencial. Selecciona un lote en el mapa interactivo para ver disponibilidad y detalles específicos.',
+    a: 'Los lotes con casa arrancan desde S/.130,900. El precio puede variar según la ubicación del lote dentro del conjunto residencial. Selecciona un lote en el mapa interactivo para ver disponibilidad y detalles específicos.',
   },
   {
     q: '¿Quiénes pueden acceder al crédito preferencial FOVIME?',

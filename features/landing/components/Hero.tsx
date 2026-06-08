@@ -97,7 +97,7 @@ export default function Hero() {
             </div>
             <div className="mb-6">
               <div className="text-headline-lg font-extrabold text-secondary flex items-baseline gap-2">
-                <span className="text-title-md">S/.</span> 138,000
+                <span className="text-title-md">S/.</span> 130,900
               </div>
               <p className="text-body-md text-on-surface-variant mt-1">Lote + Casa de 1 piso</p>
             </div>
