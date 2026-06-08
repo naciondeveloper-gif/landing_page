@@ -22,11 +22,7 @@ export default function Home() {
       <SocialProof />
       <Caracteristicas />
       <SobreProyecto />
-      <ConoceMas />
-      <Amenidades />
-      <Brochure />
       <Ubicacion />
-
       <section id="mapa" className="py-24 bg-surface-container-low">
         <div className="max-w-container-max mx-auto px-4 md:px-16">
           <div className="text-center mb-12">
@@ -77,8 +73,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <FAQ />
+      <ConoceMas />
+      <Amenidades />
+      <Brochure />
+      <div id="faq"><FAQ /></div>
       <Footer />
       <WhatsAppButton />
     </div>

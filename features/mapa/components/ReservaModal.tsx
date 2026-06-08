@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Lote } from '@/types/lote';
+import { waLink } from '@/config/contacto';
 
 interface ModalProps {
   lote: Lote;
@@ -11,6 +12,7 @@ interface ModalProps {
 
 export default function ReservaModal({ lote, onClose }: ModalProps) {
   const [formData, setFormData] = useState({ nombre: '', telefono: '', correo: '', mensaje: '' });
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [errores, setErrores] = useState<Record<string, string>>({});
@@ -30,7 +32,8 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
     else if (!/^\d{7,15}$/.test(formData.telefono.replace(/\s/g, '')))
       e.telefono = 'Solo dígitos, entre 7 y 15';
 
-    if (formData.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo))
+    if (!formData.correo.trim()) e.correo = 'El correo es requerido';
+    else if (formData.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo))
       e.correo = 'Correo inválido';
 
     return e;
@@ -116,7 +119,7 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 bg-white/10 rounded-lg px-3 py-1.5">
               <span className="material-symbols-outlined text-amber-400 text-base">square_foot</span>
-              <span className="text-white text-sm font-medium">{lote.area}</span>
+              <span className="text-white text-sm font-medium">{lote.area} m<sup>2</sup></span>
             </div>
             <div className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 ${lote.disponible ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
               <span
@@ -185,6 +188,7 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
                       onChange={handleChange}
                       placeholder="924 888 889"
                       className={inputClass('telefono')}
+                      required
                     />
                     {errores.telefono && (
                       <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
@@ -195,7 +199,7 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">
-                      Correo <span className="text-gray-400 font-normal text-xs">(opcional)</span>
+                      Correo <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -204,6 +208,7 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
                       onChange={handleChange}
                       placeholder="correo@ejemplo.com"
                       className={inputClass('correo')}
+                      required
                     />
                     {errores.correo && (
                       <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
@@ -228,10 +233,30 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
                   />
                 </div>
 
+                <label className="flex items-start gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={aceptaTerminos}
+                    onChange={(e) => setAceptaTerminos(e.target.checked)}
+                    className="mt-0.5 accent-blue-950 w-4 h-4 shrink-0"
+                  />
+                  <span className="text-xs text-gray-500 leading-snug">
+                    Acepto los{' '}
+                    <a href="/terminos" target="_blank" className="text-blue-700 underline hover:text-blue-900">
+                      Términos y Condiciones
+                    </a>{' '}
+                    y la{' '}
+                    <a href="/privacidad" target="_blank" className="text-blue-700 underline hover:text-blue-900">
+                      Política de Privacidad
+                    </a>
+                    .
+                  </span>
+                </label>
+
                 <button
                   type="submit"
-                  disabled={cargando}
-                  className="w-full bg-blue-950 hover:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed transition-colors text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 shadow-md"
+                  disabled={cargando || !aceptaTerminos}
+                  className="w-full bg-blue-950 hover:bg-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 shadow-md"
                 >
                   {cargando ? (
                     <>
@@ -245,6 +270,16 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
                     </>
                   )}
                 </button>
+
+                <a
+                  href={waLink(`Hola, me interesa el Lote ${lote.numero} de Mz. ${lote.mz} en Chavín de Huántar`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 whatsapp-gradient text-white font-bold py-3 rounded-lg transition-opacity hover:opacity-90 text-sm"
+                >
+                  <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>chat</span>
+                  Consultar por WhatsApp
+                </a>
               </form>
             )
           ) : (
@@ -258,9 +293,18 @@ export default function ReservaModal({ lote, onClose }: ModalProps) {
               <p className="text-gray-500 text-sm">
                 El Lote {lote.numero} de Mz. {lote.mz} ya fue vendido o está en proceso de separación.
               </p>
+              <a
+                href={waLink(`Hola, el Lote ${lote.numero} de Mz. ${lote.mz} aparece no disponible. ¿Tienen otros lotes similares en Chavín de Huántar?`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 w-full flex items-center justify-center gap-2 whatsapp-gradient text-white font-bold py-3 rounded-lg transition-opacity hover:opacity-90 text-sm"
+              >
+                <span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>chat</span>
+                Consultar otros lotes por WhatsApp
+              </a>
               <button
                 onClick={onClose}
-                className="mt-6 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                className="mt-3 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-base">arrow_back</span>
                 Ver otros lotes

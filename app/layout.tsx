@@ -4,17 +4,65 @@ import './globals.css';
 
 const manrope = Manrope({ subsets: ['latin'], weight: ['400', '600', '700', '800'] });
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.consorcioneptuno.com';
+
 export const metadata: Metadata = {
-  title: 'Chavín de Huántar | Conjunto Residencial – Consorcio Neptuno',
-  description: 'Lotes y casas desde S/.138,000. Proyecto exclusivo para la familia militar. KM 52 Panamericana Sur – Chilca, Perú. Título de propiedad, agua y desagüe, zona segura.',
-  keywords: 'lotes, casas, familia militar, Chilca, Perú, FOVIME, Consorcio Neptuno, Chavín de Huántar',
-  icons: { icon: '/neptuno-logo.png' },
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: 'Chavín de Huántar | Lotes y Casas – Consorcio Neptuno & FOVIME',
+    template: '%s – Chavín de Huántar',
+  },
+  description:
+    'Lotes y casas desde S/.138,000 en Chilca, Lima. Proyecto exclusivo para la familia militar peruana. Título de propiedad, agua, desagüe y financiamiento preferencial FOVIME. KM 52 Panamericana Sur.',
+  keywords: [
+    'lotes Chilca',
+    'casas familia militar',
+    'FOVIME',
+    'Consorcio Neptuno',
+    'Chavín de Huántar',
+    'conjunto residencial Chilca',
+    'lotes Lima sur',
+    'vivienda militar Perú',
+    'Panamericana Sur KM 52',
+  ],
+  authors: [{ name: 'Consorcio Neptuno' }],
+  creator: 'Consorcio Neptuno',
+  icons: {
+    icon: '/neptuno-logo.png',
+    shortcut: '/neptuno-logo.png',
+    apple: '/neptuno-logo.png',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: BASE_URL,
+  },
   openGraph: {
-    title: 'Chavín de Huántar | Tu nuevo hogar te espera',
-    description: 'Lotes + Casas desde S/.138,000. Exclusivo para la familia militar.',
+    title: 'Chavín de Huántar | Tu nuevo hogar en Chilca',
+    description:
+      'Lotes + Casas desde S/.138,000. Exclusivo para la familia militar peruana. Financiamiento FOVIME. KM 52 Panamericana Sur – Chilca, Lima.',
+    url: BASE_URL,
     type: 'website',
     locale: 'es_PE',
-    siteName: 'Consorcio Neptuno',
+    siteName: 'Chavín de Huántar – Consorcio Neptuno',
+    images: [
+      {
+        url: '/hero-bg.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Conjunto Residencial Chavín de Huántar – Chilca, Lima',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Chavín de Huántar | Lotes y Casas desde S/.138,000',
+    description:
+      'Proyecto exclusivo para la familia militar. Financiamiento preferencial FOVIME. Chilca, Lima.',
+    images: ['/hero-bg.jpg'],
   },
 };
 

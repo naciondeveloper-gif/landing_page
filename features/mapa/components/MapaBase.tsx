@@ -22,6 +22,19 @@ export default function MapaBase() {
       >
         <g>
           {lotes.map((lote: Lote) => (
+            lote.d === "m 845.12859,121.70396 c 0.22663,1.58645 10.42529,44.64744 10.42529,44.64744 l -70.25741,15.86458 -9.97201,-42.83435 c 0,0 51.44655,-24.25014 69.80413,-17.67767 z" ? 
+            <path
+              key={lote.id}
+              d={lote.d}
+              className="cursor-pointer transition-all"
+              style={{
+                fill: lote.type === 'lote' ? (lote.disponible ? '#e8eb1400' : '#0046DE') : '#ffffff',
+                fillOpacity: lote.type === 'lote' ? (hoveredLote?.id === lote.id ? 0.6 : 0.7) : 0,
+              }}
+              onMouseEnter={() => setHoveredLote(lote)}
+              onMouseLeave={() => setHoveredLote(null)}
+              onClick={() => lote.disponible && setSelectedLote(lote)}
+            /> :
             <path
               key={lote.id}
               d={lote.d}
@@ -46,7 +59,7 @@ export default function MapaBase() {
         >
           <p className="text-white/60 text-xs">Mz. {hoveredLote.mz}</p>
           <p className="font-bold text-sm">Lote {hoveredLote.numero}</p>
-          <p className="text-amber-400 text-xs">{hoveredLote.area}</p>
+          <p className="text-amber-400 text-xs">{hoveredLote.area} m<sup>2</sup></p>
         </div>
       )}
 

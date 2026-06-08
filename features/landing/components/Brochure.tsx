@@ -6,7 +6,7 @@ const specs = [
   { icon: 'bathtub',      label: 'Baños',             value: '1 baño completo' },
   { icon: 'square_foot',  label: 'Área de Terreno',   value: '90 m²' },
   { icon: 'architecture', label: 'Área Techada',      value: '35 m²' },
-  { icon: 'apartment',    label: 'Total de Lotes',    value: '304 unidades' },
+  { icon: 'apartment',    label: 'Total de Lotes',    value: '309 unidades' },
 ];
 
 export default function Brochure() {

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { waLink, EMAIL, WHATSAPP_DISPLAY, DIRECCION } from '@/config/contacto';
 
 export default function Footer() {
@@ -31,27 +32,28 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-4 space-y-6">
             <div className="flex items-center gap-4">
-              <img src="/fovime-logo.png"  alt="FOVIME" className="h-10 w-auto opacity-90" />
+              <a href="https://fovime.com/proyecto-inmobiliario/chavin-de-huantar/" target="_blank" rel="noopener noreferrer">
+                <img src="/fovime-logo.png"  alt="FOVIME" className="h-10 w-auto opacity-90 hover:opacity-100 transition-opacity" />
+              </a>
               <div className="w-px h-8 bg-outline-variant" />
               <img src="/neptuno-logo.png" alt="Consorcio Neptuno" className="h-10 w-auto opacity-90" />
             </div>
             <p className="text-body-md text-on-surface-variant leading-relaxed">
               Chavín de Huántar es un conjunto residencial ubicado en el KM 52 Panamericana Sur — Chilca. Un proyecto exclusivo de Consorcio Neptuno y FOVIME para la familia militar peruana.
             </p>
-            <div className="flex gap-4">
-              {['face_nod', 'photo_camera', 'play_circle'].map((icon) => (
-                <a key={icon} href="#" className="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary hover:bg-secondary hover:text-on-secondary transition-colors">
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>{icon}</span>
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Proyecto links */}
           <div className="md:col-span-2 md:ml-auto">
             <h3 className="text-title-md text-on-surface mb-6 uppercase tracking-wider">Proyecto</h3>
             <ul className="space-y-4">
-              {[['#inicio','Inicio'],['#nosotros','El Proyecto'],['#mapa','Planos'],['#mapa','Mapa de Lotes'],['#contacto','Galería']].map(([href, label]) => (
+              {[
+                ['/#inicio', 'Inicio'],
+                ['/#nosotros', 'El Proyecto'],
+                ['/#mapa', 'Mapa de Lotes'],
+                ['/#faq', 'Preguntas Frecuentes'],
+                ['/#contacto', 'Contacto'],
+              ].map(([href, label]) => (
                 <li key={label}><a href={href} className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">{label}</a></li>
               ))}
             </ul>
@@ -59,11 +61,33 @@ export default function Footer() {
 
           {/* Soporte links */}
           <div className="md:col-span-2">
-            <h3 className="text-title-md text-on-surface mb-6 uppercase tracking-wider">Soporte</h3>
+            <h3 className="text-title-md text-on-surface mb-6 uppercase tracking-wider">Legal</h3>
             <ul className="space-y-4">
-              {['Privacidad','Términos','Preguntas Frecuentes','Libro de Reclamaciones'].map((label) => (
-                <li key={label}><a href="#" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">{label}</a></li>
-              ))}
+              <li>
+                <Link href="/privacidad" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">
+                  Política de Privacidad
+                </Link>
+              </li>
+              <li>
+                <Link href="/terminos" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">
+                  Términos y Condiciones
+                </Link>
+              </li>
+              <li>
+                <a href="/#faq" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">
+                  Preguntas Frecuentes
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://enlinea.indecopi.gob.pe/reclamavirtual/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-on-surface-variant hover:text-secondary transition-colors text-body-md"
+                >
+                  Libro de Reclamaciones
+                </a>
+              </li>
             </ul>
           </div>
 
