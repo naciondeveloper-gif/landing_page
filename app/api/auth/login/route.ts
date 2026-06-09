@@ -34,7 +34,8 @@ export async function POST(request: Request) {
       ? await bcrypt.compare(password, userAdmin.password || '')
       : await bcrypt.compare(password, '$2b$12$invalidhashpaddinginvalidhash00');
 
-    if (!userAdmin || !passwordMatches || userAdmin.rol !== 'administrador') {
+    const rolValido = userAdmin?.rol === 'administrador' || userAdmin?.rol === 'vendedor';
+    if (!userAdmin || !passwordMatches || !rolValido) {
       return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
     }
 

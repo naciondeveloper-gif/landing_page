@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-type Tab = 'lotes' | 'reservas' | 'usuarios';
+type Tab = 'dashboard' | 'lotes' | 'reservas' | 'usuarios';
 
 interface Props {
   username: string;
@@ -22,9 +22,10 @@ export default function AdminNavbar({ username, rol, activeTab, onTabChange }: P
   };
 
   const tabs: { key: Tab; label: string; icon: string; onlyAdmin?: boolean }[] = [
-    { key: 'lotes',    label: 'Lotes',    icon: 'grid_view',       onlyAdmin: true },
-    { key: 'reservas', label: 'Reservas', icon: 'event_available'  },
-    { key: 'usuarios', label: 'Usuarios', icon: 'group',           onlyAdmin: true },
+    { key: 'dashboard', label: 'Dashboard', icon: 'dashboard'                       },
+    { key: 'lotes',     label: 'Lotes',     icon: 'grid_view'                       },
+    { key: 'reservas',  label: 'Reservas',  icon: 'event_available'                 },
+    { key: 'usuarios',  label: 'Usuarios',  icon: 'group',          onlyAdmin: true },
   ];
 
   const visibleTabs = tabs.filter(t => !t.onlyAdmin || rol === 'administrador');

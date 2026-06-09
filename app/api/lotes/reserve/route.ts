@@ -13,9 +13,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Faltan campos obligatorios" }, { status: 400 });
     }
 
-    // Validate email if provided — reject CRLF injection attempts
-    const correoSeguro = correo?.trim() ? sanitizeEmail(correo) : null;
-    if (correo?.trim() && correoSeguro === null) {
+    if (!correo?.trim()) {
+      return NextResponse.json({ error: "El correo es obligatorio" }, { status: 400 });
+    }
+
+    // Validate email — reject CRLF injection attempts
+    const correoSeguro = sanitizeEmail(correo);
+    if (correoSeguro === null) {
       return NextResponse.json({ error: "Correo inválido" }, { status: 400 });
     }
 

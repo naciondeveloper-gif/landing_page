@@ -37,7 +37,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Se requieren los datos del comprador' }, { status: 400 });
   }
 
-  // Validate email if provided
+  if ((nuevoEstado === 'separado' || nuevoEstado === 'vendido') && !comprador?.correo?.trim()) {
+    return NextResponse.json({ error: 'El correo del comprador es obligatorio' }, { status: 400 });
+  }
+
+  // Validate email
   let correoSeguro: string | null = null;
   if (comprador?.correo?.trim()) {
     correoSeguro = sanitizeEmail(comprador.correo);

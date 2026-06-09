@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminNavbar from '@/features/admin/components/AdminNavbar';
 import StatCards from '@/features/admin/components/StatCards';
+import Dashboard from '@/features/admin/components/Dashboard';
 import LotesTable from '@/features/admin/components/LotesTable';
 import ReservasTable from '@/features/admin/components/ReservasTable';
 import GestionUsuarios from '@/features/admin/components/GestionUsuarios';
@@ -11,7 +12,7 @@ import CrearUsuarioModal from '@/features/admin/components/CrearUsuarioModal';
 import { useAdminLotes } from '@/features/admin/hooks/useAdminLotes';
 import type { Lote, EstadoLote } from '@/types/lote';
 
-type Tab = 'lotes' | 'reservas' | 'usuarios';
+type Tab = 'dashboard' | 'lotes' | 'reservas' | 'usuarios';
 
 interface Usuario {
   username: string;
@@ -35,7 +36,7 @@ export default function AdminPage() {
       try {
         const u: Usuario = JSON.parse(userStorage);
         setUsuario(u);
-        setActiveTab(u.rol === 'administrador' ? 'lotes' : 'reservas');
+        setActiveTab('dashboard');
       } catch {}
     }
   }, [router]);
@@ -69,13 +70,17 @@ export default function AdminPage() {
       />
 
       <div className="px-4 sm:px-6 pt-20 pb-10 max-w-7xl mx-auto">
-        {activeTab !== 'usuarios' && (
+        {activeTab !== 'usuarios' && activeTab !== 'dashboard' && (
           <div className="mb-6">
             <StatCards conteo={conteo} />
           </div>
         )}
 
-        {activeTab === 'lotes' && usuario?.rol === 'administrador' && (
+        {activeTab === 'dashboard' && (
+          <Dashboard lotes={lotes} conteo={conteo} />
+        )}
+
+        {activeTab === 'lotes' && (
           <LotesTable lotes={lotes} onRefresh={fetchDatos} onEditEstado={setModalLote} />
         )}
 

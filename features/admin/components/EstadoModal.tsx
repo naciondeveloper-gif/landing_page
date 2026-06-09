@@ -31,8 +31,11 @@ export default function EstadoModal({ lote, onClose, onConfirm }: Props) {
 
   const necesitaComprador = seleccion !== null && REQUIERE_COMPRADOR.includes(seleccion);
 
-  const formValido = !necesitaComprador ||
-    (comprador.nombre.trim().length > 0 && comprador.telefono.trim().length > 0);
+  const formValido = !necesitaComprador || (
+    comprador.nombre.trim().length > 0 &&
+    comprador.telefono.trim().length > 0 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(comprador.correo.trim())
+  );
 
   const confirmar = async () => {
     if (!seleccion || !formValido) return;
@@ -148,7 +151,7 @@ export default function EstadoModal({ lote, onClose, onConfirm }: Props) {
 
                 <div>
                   <label className="block text-xs font-semibold text-gray-500 mb-1">
-                    Correo electrónico <span className="text-gray-400 font-normal">(opcional)</span>
+                    Correo electrónico <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"

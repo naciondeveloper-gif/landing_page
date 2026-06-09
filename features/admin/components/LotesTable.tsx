@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { ESTADO_CONFIG } from '@/config/estados';
 import type { Lote, EstadoLote } from '@/types/lote';
+import EditarLoteModal from './EditarLoteModal';
 
 const PAGE_SIZE = 20;
 
@@ -59,6 +60,7 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('mz');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [pagina, setPagina] = useState(1);
+  const [editarLote, setEditarLote] = useState<Lote | null>(null);
 
   const manzanas = useMemo(() => {
     const set = new Set(lotes.map(l => l.mz));
@@ -200,15 +202,16 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
                   Estado <SortIcon k="estado" />
                 </button>
               </th>
+              <th className="px-4 py-3 text-left font-semibold">Precio</th>
               <th className="px-4 py-3 text-left font-semibold">Cliente</th>
               <th className="px-4 py-3 text-left font-semibold">Tiempo</th>
-              <th className="px-4 py-3 text-right font-semibold">Acción</th>
+              <th className="px-4 py-3 text-right font-semibold">Acciones</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
             {lotesVisibles.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-gray-400 text-sm">
+                <td colSpan={8} className="px-4 py-10 text-center text-gray-400 text-sm">
                   <span className="material-symbols-outlined text-3xl block mb-2 opacity-30">search_off</span>
                   No hay lotes que coincidan con los filtros.
                 </td>
@@ -229,6 +232,11 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
                         {cfg.label}
                       </span>
                     </td>
+                    <td className="px-4 py-3 text-xs font-semibold text-gray-700 whitespace-nowrap">
+                      {lote.precio != null
+                        ? `S/ ${Number(lote.precio).toLocaleString('es-PE', { maximumFractionDigits: 0 })}`
+                        : <span className="text-gray-300">—</span>}
+                    </td>
                     <td className="px-4 py-3">
                       {reservacion ? (
                         <div className="text-xs">
@@ -247,13 +255,24 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
                       )}
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <button
-                        onClick={() => onEditEstado(lote)}
-                        className="inline-flex items-center gap-1.5 bg-blue-950 hover:bg-blue-800 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors"
-                      >
-                        <span className="material-symbols-outlined text-sm">edit</span>
-                        Estado
-                      </button>
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => setEditarLote(lote)}
+                          className="inline-flex items-center gap-1 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-600 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors"
+                          title="Editar datos del lote"
+                        >
+                          <span className="material-symbols-outlined text-sm">tune</span>
+                          <span className="hidden sm:inline">Editar</span>
+                        </button>
+                        <button
+                          onClick={() => onEditEstado(lote)}
+                          className="inline-flex items-center gap-1 bg-blue-950 hover:bg-blue-800 text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-colors"
+                          title="Cambiar estado"
+                        >
+                          <span className="material-symbols-outlined text-sm">swap_horiz</span>
+                          <span className="hidden sm:inline">Estado</span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -308,6 +327,14 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
             </button>
           </div>
         </div>
+      )}
+
+      {editarLote && (
+        <EditarLoteModal
+          lote={editarLote}
+          onClose={() => setEditarLote(null)}
+          onSuccess={() => { setEditarLote(null); onRefresh(); }}
+        />
       )}
     </div>
   );
