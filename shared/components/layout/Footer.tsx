@@ -39,7 +39,7 @@ export default function Footer() {
               <img src="/neptuno-logo.png" alt="Consorcio Neptuno" className="h-10 w-auto opacity-90" />
             </div>
             <p className="text-body-md text-on-surface-variant leading-relaxed">
-              Chavín de Huántar es un conjunto residencial ubicado en el KM 52 Panamericana Sur — Chilca. Un proyecto exclusivo de Consorcio Neptuno y FOVIME para la familia militar peruana.
+              Chavín de Huántar es un conjunto residencial ubicado en el KM 52 Panamericana Sur - Lima. Un proyecto exclusivo de Consorcio Neptuno y FOVIME para la familia militar peruana.
             </p>
           </div>
 

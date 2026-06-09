@@ -16,7 +16,7 @@ export default function SobreProyecto() {
           />
           <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-blue-950/90 to-transparent p-6">
             <p className="text-white font-bold text-lg">Conjunto Residencial Chavín de Huántar</p>
-            <p className="text-blue-200 text-sm">KM 52 Panamericana Sur – Chilca, Lima</p>
+            <p className="text-blue-200 text-sm">KM 52 Panamericana Sur – Lima</p>
           </div>
         </div>
 

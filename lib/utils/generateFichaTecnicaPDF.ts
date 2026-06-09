@@ -32,7 +32,7 @@ export async function generateFichaTecnicaPDF() {
   doc.setFontSize(10);
   doc.text('Consorcio Neptuno — Ficha Técnica del Proyecto', 14, 27);
   doc.setFontSize(8.5);
-  doc.text('Ctra. Panamericana Sur 52, Chilca 15871 — Lima, Perú', 14, 35);
+  doc.text('Ctra. Panamericana Sur 52, Lima, Perú', 14, 35);
 
   // ── Gold accent line ────────────────────────────────────────────────
   doc.setDrawColor(...SECONDARY);
@@ -119,7 +119,7 @@ export async function generateFichaTecnicaPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.setTextColor(...TEXT_DARK);
-  doc.text('Ctra. Panamericana Sur 52, Chilca 15871, Lima — Perú', 20, y + 8);
+  doc.text('Ctra. Panamericana Sur 52, Lima — Perú', 20, y + 8);
   doc.setFontSize(8);
   doc.setTextColor(...TEXT_MID);
   doc.text('A 52 km al sur de Lima, fácil acceso desde la Panamericana Sur.', 20, y + 15);

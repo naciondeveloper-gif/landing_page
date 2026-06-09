@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     template: '%s – Chavín de Huántar',
   },
   description:
-    'Lotes y casas desde S/.130,900 en Chilca, Lima. Proyecto exclusivo para la familia militar peruana. Título de propiedad, agua, desagüe y financiamiento preferencial FOVIME. KM 52 Panamericana Sur.',
+    'Lotes y casas desde S/.130,900 en Lima. Proyecto exclusivo para la familia militar peruana. Título de propiedad, agua, desagüe y financiamiento preferencial FOVIME. KM 52 Panamericana Sur.',
   keywords: [
-    'lotes Chilca',
+    'lotes Lima',
     'casas familia militar',
     'FOVIME',
     'Consorcio Neptuno',
     'Chavín de Huántar',
-    'conjunto residencial Chilca',
+    'conjunto residencial',
     'lotes Lima sur',
     'vivienda militar Perú',
     'Panamericana Sur KM 52',
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: 'Chavín de Huántar | Tu nuevo hogar en Chilca',
+    title: 'Chavín de Huántar | Tu nuevo hogar en Lima',
     description:
-      'Lotes + Casas desde S/.130,900. Exclusivo para la familia militar peruana. Financiamiento FOVIME. KM 52 Panamericana Sur – Chilca, Lima.',
+      'Lotes + Casas desde S/.130,900. Exclusivo para la familia militar peruana. Financiamiento FOVIME. KM 52 Panamericana Sur – Lima.',
     url: BASE_URL,
     type: 'website',
     locale: 'es_PE',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
         url: '/hero-bg.jpg',
         width: 1200,
         height: 630,
-        alt: 'Conjunto Residencial Chavín de Huántar – Chilca, Lima',
+        alt: 'Conjunto Residencial Chavín de Huántar – Lima',
       },
     ],
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Chavín de Huántar | Lotes y Casas desde S/.130,900',
     description:
-      'Proyecto exclusivo para la familia militar. Financiamiento preferencial FOVIME. Chilca, Lima.',
+      'Proyecto exclusivo para la familia militar. Financiamiento preferencial FOVIME. Lima.',
     images: ['/hero-bg.jpg'],
   },
 };

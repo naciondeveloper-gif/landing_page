@@ -18,7 +18,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 md:px-16 py-16 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+      <div className="relative z-10 w-full max-w-container-max mx-auto px-4 md:px-16 py-16 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
 
         {/* ── Left: messaging ── */}
         <motion.div
@@ -40,7 +40,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-body-lg text-on-surface-variant max-w-xl">
-              Un conjunto residencial con servicios completos y el respaldo financiero de FOVIME. A solo 52 km de Lima, con acceso directo por la Panamericana Sur — Chilca.
+              Un conjunto residencial con servicios completos y el respaldo financiero de FOVIME. A solo 52 km de Lima, con acceso directo por la Panamericana Sur.
             </p>
           </div>
 
@@ -105,7 +105,7 @@ export default function Hero() {
               {[
                 { label: 'Área Terreno',  value: '90 m²' },
                 { label: 'Área Techada',  value: '35 m²' },
-                { label: 'Ubicación',     value: 'KM 52 Pan. Sur – Chilca' },
+                { label: 'Ubicación',     value: 'KM 52 Pan. Sur - Lima' },
               ].map((r) => (
                 <div key={r.label} className="flex justify-between text-body-md">
                   <span className="text-on-surface-variant">{r.label}</span>

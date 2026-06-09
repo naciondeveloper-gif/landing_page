@@ -19,7 +19,7 @@ export default function SocialProof() {
         <div className="h-8 w-px bg-outline-variant hidden md:block" />
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-secondary">location_on</span>
-          <span className="text-title-md tracking-wider text-on-surface">KM 52 PAN SUR – Chilca</span>
+          <span className="text-title-md tracking-wider text-on-surface">KM 52 PAN SUR - Lima</span>
         </div>
       </div>
     </section>

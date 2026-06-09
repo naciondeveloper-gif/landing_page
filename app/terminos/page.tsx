@@ -44,7 +44,7 @@ export default function TerminosPage() {
               Chavín de Huántar es un conjunto residencial desarrollado por{' '}
               <strong className="text-on-surface">Consorcio Neptuno</strong> y{' '}
               <strong className="text-on-surface">FOVIME</strong>, ubicado en el KM 52
-              Panamericana Sur, Chilca, Lima. El acceso al crédito preferencial está sujeto a los
+              Panamericana Sur, Lima. El acceso al crédito preferencial está sujeto a los
               requisitos establecidos por FOVIME y es exclusivo para el personal de la familia
               militar peruana y sus beneficiarios.
             </p>

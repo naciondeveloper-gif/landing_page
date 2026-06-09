@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: '¿Dónde se ubica exactamente el proyecto?',
-    a: 'En el KM 52 de la Panamericana Sur, distrito de Chilca, provincia de Cañete, Lima. A aproximadamente 52 km del centro de Lima, con acceso directo por la vía principal.',
+    a: 'En el KM 52 de la Panamericana Sur, Lima. A aproximadamente 52 km del centro de Lima, con acceso directo por la vía principal.',
   },
   {
     q: '¿Los lotes cuentan con todos los servicios básicos?',

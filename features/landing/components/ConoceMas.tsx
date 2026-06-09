@@ -29,7 +29,7 @@ export default function ConoceMas() {
                   A 52 KM DE LIMA, CONECTADO CON TODO
                 </h3>
                 <p className="text-body-lg text-on-surface-variant leading-relaxed">
-                  Acceso directo por la Panamericana Sur — Chilca, Lima. Cerca de colegios, centros de salud y comercios, sin perder la comodidad de vivir alejado del ruido de la ciudad.
+                  Acceso directo por la Panamericana Sur — Lima. Cerca de colegios, centros de salud y comercios, sin perder la comodidad de vivir alejado del ruido de la ciudad.
                 </p>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function ConoceMas() {
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent flex items-end p-8">
                 <p className="text-white text-title-md italic">
-                  Conjunto Residencial Chavín de Huántar — KM 52 Pan. Sur, Chilca, Lima
+                  Conjunto Residencial Chavín de Huántar — KM 52 Pan. Sur, Lima
                 </p>
               </div>
             </div>

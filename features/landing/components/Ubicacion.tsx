@@ -4,7 +4,7 @@ export default function Ubicacion() {
       <div className="max-w-container-max mx-auto px-4 md:px-16 text-center mb-12">
         <h2 className="text-headline-lg mb-4 text-on-surface">Ubicación Estratégica</h2>
         <p className="text-body-lg text-on-surface-variant">
-          Encuéntranos en Chilca, un lugar de paz y crecimiento constante.
+          Encuéntranos en Lima, un lugar de paz y crecimiento constante.
         </p>
       </div>
 
@@ -20,7 +20,7 @@ export default function Ubicacion() {
           title="Ubicación Conjunto Residencial Chavín de Huántar"
         />
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-surface-container/90 backdrop-blur px-6 py-2 rounded-full border border-secondary/30 pointer-events-none">
-          <p className="text-label-caps text-secondary">KM 52 PAN SUR – CHILCA, LIMA</p>
+          <p className="text-label-caps text-secondary">KM 52 PAN SUR – LIMA</p>
         </div>
       </div>
     </section>
