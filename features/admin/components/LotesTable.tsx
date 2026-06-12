@@ -17,7 +17,8 @@ function useTiempoRestante(reservado_hasta: string | null) {
     if (!reservado_hasta) { setRestante(''); return; }
 
     const calcular = () => {
-      const diff = new Date(reservado_hasta).getTime() - Date.now();
+      const ts = /Z$|[+-]\d{2}:\d{2}$/.test(reservado_hasta) ? reservado_hasta : reservado_hasta + 'Z';
+      const diff = new Date(ts).getTime() - Date.now();
       if (diff <= 0) { setRestante('Expirado'); return; }
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
@@ -57,6 +58,8 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
   const [filtroEstado, setFiltroEstado] = useState<EstadoLote | 'todos'>('todos');
   const [filtroMz, setFiltroMz] = useState('');
   const [filtroCliente, setFiltroCliente] = useState('');
+  const [filtroPrecioMin, setFiltroPrecioMin] = useState('');
+  const [filtroPrecioMax, setFiltroPrecioMax] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('mz');
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [pagina, setPagina] = useState(1);
@@ -79,6 +82,10 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
           const busq = filtroCliente.toLowerCase();
           if (!nombre.includes(busq) && !tel.includes(busq)) return false;
         }
+        const pMin = filtroPrecioMin !== '' ? Number(filtroPrecioMin) : null;
+        const pMax = filtroPrecioMax !== '' ? Number(filtroPrecioMax) : null;
+        if (pMin !== null && l.precio < pMin) return false;
+        if (pMax !== null && l.precio > pMax) return false;
         return true;
       })
       .sort((a, b) => {
@@ -93,11 +100,11 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
         if (va > vb) return sortDir === 'asc' ? 1 : -1;
         return 0;
       });
-  }, [lotes, filtroEstado, filtroMz, filtroCliente, sortKey, sortDir]);
+  }, [lotes, filtroEstado, filtroMz, filtroCliente, filtroPrecioMin, filtroPrecioMax, sortKey, sortDir]);
 
   const totalPaginas = Math.max(1, Math.ceil(lotesFiltrados.length / PAGE_SIZE));
 
-  useEffect(() => { setPagina(1); }, [filtroEstado, filtroMz, filtroCliente, sortKey, sortDir]);
+  useEffect(() => { setPagina(1); }, [filtroEstado, filtroMz, filtroCliente, filtroPrecioMin, filtroPrecioMax, sortKey, sortDir]);
 
   const lotesVisibles = lotesFiltrados.slice((pagina - 1) * PAGE_SIZE, pagina * PAGE_SIZE);
 
@@ -165,9 +172,27 @@ export default function LotesTable({ lotes, onRefresh, onEditEstado }: Props) {
             />
           </div>
 
-          {(filtroEstado !== 'todos' || filtroMz || filtroCliente) && (
+          <div className="flex items-center gap-1">
+            <input
+              type="number"
+              value={filtroPrecioMin}
+              onChange={e => setFiltroPrecioMin(e.target.value)}
+              placeholder="Precio mín"
+              className="text-xs border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-950/20 w-28"
+            />
+            <span className="text-gray-400 text-xs">—</span>
+            <input
+              type="number"
+              value={filtroPrecioMax}
+              onChange={e => setFiltroPrecioMax(e.target.value)}
+              placeholder="Precio máx"
+              className="text-xs border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-950/20 w-28"
+            />
+          </div>
+
+          {(filtroEstado !== 'todos' || filtroMz || filtroCliente || filtroPrecioMin || filtroPrecioMax) && (
             <button
-              onClick={() => { setFiltroEstado('todos'); setFiltroMz(''); setFiltroCliente(''); }}
+              onClick={() => { setFiltroEstado('todos'); setFiltroMz(''); setFiltroCliente(''); setFiltroPrecioMin(''); setFiltroPrecioMax(''); }}
               className="text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1 transition-colors"
             >
               <span className="material-symbols-outlined text-sm">close</span>

@@ -13,8 +13,9 @@ const specs = [
   { icon: 'apartment',    label: 'Total de Lotes',    value: '309 unidades' },
 ];
 
-export default function Brochure() {
+export default function Brochure({ precioDesde }: { precioDesde?: number | null }) {
   const [downloading, setDownloading] = useState(false);
+  const precio = precioDesde != null ? precioDesde.toLocaleString('en-US') : '130,900';
 
   async function handleDownload() {
     setDownloading(true);
@@ -40,7 +41,7 @@ export default function Brochure() {
           {/* Flayer */}
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-outline-variant/20 bg-surface-container-low">
             <img
-              src="/flayer.jpeg"
+              src="/flayer.png"
               alt="Flayer Chavín de Huántar"
               className="w-full h-auto object-contain"
             />
@@ -74,7 +75,7 @@ export default function Brochure() {
 
             <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-6 mb-6">
               <p className="text-label-caps text-secondary mb-1">Precio desde</p>
-              <p className="text-[42px] leading-none font-extrabold text-secondary mb-2">S/ 130,900</p>
+              <p className="text-[42px] leading-none font-extrabold text-secondary mb-2">S/ {precio}</p>
               <p className="text-body-md text-on-surface-variant">
                 Precio base: Lote + Casa de 1 piso. Crédito preferencial FOVIME disponible.
               </p>

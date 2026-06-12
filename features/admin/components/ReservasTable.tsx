@@ -25,7 +25,8 @@ function useTiempoRestante(reservado_hasta: string | null) {
     if (!reservado_hasta) { setRestante(''); return; }
 
     const calcular = () => {
-      const diff = new Date(reservado_hasta).getTime() - Date.now();
+      const ts = /Z$|[+-]\d{2}:\d{2}$/.test(reservado_hasta) ? reservado_hasta : reservado_hasta + 'Z';
+      const diff = new Date(ts).getTime() - Date.now();
       if (diff <= 0) { setRestante('Expirado'); return; }
       const h = Math.floor(diff / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);

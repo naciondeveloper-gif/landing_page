@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { waLink } from "@/config/contacto";
+import { supabase } from "@/lib/supabase/client";
 import Nav          from "@/shared/components/layout/Navbar";
 import Hero         from "@/features/landing/components/Hero";
 import SocialProof  from "@/features/landing/components/SocialProof";
@@ -14,11 +15,20 @@ import Footer       from "@/shared/components/layout/Footer";
 import WhatsAppButton  from "@/features/landing/components/WhatsAppButton";
 import MapaBase     from "@/features/mapa/components/MapaBase";
 
-export default function Home() {
+export default async function Home() {
+  const { data: loteMin } = await supabase
+    .from('lotes')
+    .select('precio')
+    .eq('estado', 'disponible')
+    .order('precio', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+
+  const precioDesde: number | null = loteMin?.precio ?? null;
   return (
     <div id="inicio" className="bg-background">
       <Nav />
-      <Hero />
+      <Hero precioDesde={precioDesde} />
       <SocialProof />
       <Caracteristicas />
       <SobreProyecto />
@@ -36,7 +46,7 @@ export default function Home() {
                   Click para saber más
                 </div>
                 <div className="relative w-full max-w-4xl">
-                  <Image src="/plano.jpg" alt="Plano" width={3178} height={4460} className="w-full" />
+                  <Image src="/plano.svg" alt="Plano" width={3178} height={4460} className="w-full" />
                   <div>
                     <div className="absolute top-0 left-0 w-full h-full flex">
                       <MapaBase />
@@ -75,7 +85,7 @@ export default function Home() {
       </section>
       <ConoceMas />
       <Amenidades />
-      <Brochure />
+      <Brochure precioDesde={precioDesde} />
       <div id="faq"><FAQ /></div>
       <Footer />
       <WhatsAppButton />

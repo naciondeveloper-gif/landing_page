@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { waLink } from '@/config/contacto';
 
-export default function Hero() {
+export default function Hero({ precioDesde }: { precioDesde?: number | null }) {
+  const precio = precioDesde != null ? precioDesde.toLocaleString('en-US') : '130,900';
   return (
     <section id="inicio" className="relative min-h-screen pt-20 flex flex-col justify-center overflow-hidden bg-background">
 
@@ -97,7 +98,7 @@ export default function Hero() {
             </div>
             <div className="mb-6">
               <div className="text-headline-lg font-extrabold text-secondary flex items-baseline gap-2">
-                <span className="text-title-md">S/.</span> 130,900
+                <span className="text-title-md">S/.</span> {precio}
               </div>
               <p className="text-body-md text-on-surface-variant mt-1">Lote + Casa de 1 piso</p>
             </div>

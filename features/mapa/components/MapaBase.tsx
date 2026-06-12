@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { useState } from 'react';
 import { useLotes } from '@/features/mapa/hooks/useLotes';
 import ReservaModal from './ReservaModal';
