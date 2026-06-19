@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { waLink } from "@/config/contacto";
-import { supabase } from "@/lib/supabase/client";
 import Nav          from "@/shared/components/layout/Navbar";
 import Hero         from "@/features/landing/components/Hero";
 import SocialProof  from "@/features/landing/components/SocialProof";
@@ -15,20 +14,11 @@ import Footer       from "@/shared/components/layout/Footer";
 import WhatsAppButton  from "@/features/landing/components/WhatsAppButton";
 import MapaBase     from "@/features/mapa/components/MapaBase";
 
-export default async function Home() {
-  const { data: loteMin } = await supabase
-    .from('lotes')
-    .select('precio')
-    .eq('estado', 'disponible')
-    .order('precio', { ascending: true })
-    .limit(1)
-    .maybeSingle();
-
-  const precioDesde: number | null = loteMin?.precio ?? null;
+export default function Home() {
   return (
     <div id="inicio" className="bg-background">
       <Nav />
-      <Hero precioDesde={precioDesde} />
+      <Hero />
       <SocialProof />
       <Caracteristicas />
       <SobreProyecto />
@@ -85,7 +75,7 @@ export default async function Home() {
       </section>
       <ConoceMas />
       <Amenidades />
-      <Brochure precioDesde={precioDesde} />
+      <Brochure />
       <div id="faq"><FAQ /></div>
       <Footer />
       <WhatsAppButton />

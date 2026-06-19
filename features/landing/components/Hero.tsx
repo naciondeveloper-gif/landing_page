@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { waLink } from '@/config/contacto';
 
-export default function Hero({ precioDesde }: { precioDesde?: number | null }) {
-  const precio = precioDesde != null ? precioDesde.toLocaleString('en-US') : '130,900';
+export default function Hero() {
+  const precio = '139,000';
   return (
     <section id="inicio" className="relative min-h-screen pt-20 flex flex-col justify-center overflow-hidden bg-background">
 
@@ -91,7 +91,7 @@ export default function Hero({ precioDesde }: { precioDesde?: number | null }) {
         >
           <div className="bg-surface-container/60 backdrop-blur-xl border border-white/10 p-8 rounded-2xl w-full max-w-sm gold-glow">
             <div className="flex justify-between items-start mb-6">
-              <span className="text-label-caps text-on-surface-variant">PRECIO DESDE</span>
+              <span className="text-label-caps text-on-surface-variant">PRECIO</span>
               <div className="bg-secondary/20 p-2 rounded-full">
                 <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
               </div>

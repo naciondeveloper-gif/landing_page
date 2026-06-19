@@ -13,9 +13,9 @@ const specs = [
   { icon: 'apartment',    label: 'Total de Lotes',    value: '309 unidades' },
 ];
 
-export default function Brochure({ precioDesde }: { precioDesde?: number | null }) {
+export default function Brochure() {
   const [downloading, setDownloading] = useState(false);
-  const precio = precioDesde != null ? precioDesde.toLocaleString('en-US') : '130,900';
+  const precio = '139,000';
 
   async function handleDownload() {
     setDownloading(true);
@@ -74,7 +74,7 @@ export default function Brochure({ precioDesde }: { precioDesde?: number | null 
             </div>
 
             <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-6 mb-6">
-              <p className="text-label-caps text-secondary mb-1">Precio desde</p>
+              <p className="text-label-caps text-secondary mb-1">Precio</p>
               <p className="text-[42px] leading-none font-extrabold text-secondary mb-2">S/ {precio}</p>
               <p className="text-body-md text-on-surface-variant">
                 Precio base: Lote + Casa de 1 piso. Crédito preferencial FOVIME disponible.

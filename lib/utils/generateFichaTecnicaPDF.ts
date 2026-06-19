@@ -90,12 +90,12 @@ export async function generateFichaTecnicaPDF() {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(...SECONDARY);
-  doc.text('PRECIO BASE DESDE', 20, y + 9);
+  doc.text('PRECIO BASE', 20, y + 9);
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(26);
   doc.setTextColor(...SECONDARY);
-  doc.text('S/ 130,900', 20, y + 22);
+  doc.text('S/ 139,000', 20, y + 22);
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
