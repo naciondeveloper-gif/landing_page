@@ -4,8 +4,8 @@ import Nav          from "@/shared/components/layout/Navbar";
 import Hero         from "@/features/landing/components/Hero";
 import SocialProof  from "@/features/landing/components/SocialProof";
 import Caracteristicas from "@/features/landing/components/Caracteristicas";
+import ModeloVivienda  from "@/features/landing/components/ModeloVivienda";
 import SobreProyecto   from "@/features/landing/components/SobreProyecto";
-import ConoceMas    from "@/features/landing/components/ConoceMas";
 import Amenidades   from "@/features/landing/components/Amenidades";
 import Brochure     from "@/features/landing/components/Brochure";
 import Ubicacion    from "@/features/landing/components/Ubicacion";
@@ -21,6 +21,7 @@ export default function Home() {
       <Hero />
       <SocialProof />
       <Caracteristicas />
+      <ModeloVivienda />
       <SobreProyecto />
       <Ubicacion />
       <section id="mapa" className="py-24 bg-surface-container-low">
@@ -73,7 +74,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <ConoceMas />
       <Amenidades />
       <Brochure />
       <div id="faq"><FAQ /></div>
