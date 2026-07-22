@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { supabase } from "@/lib/supabase/client";
+import { getAdminSession } from "@/lib/auth/session";
 import bcrypt from "bcryptjs";
 
 export async function POST(request: Request) {
-  const cookieStore = await cookies();
-  const session = cookieStore.get("session");
+  const admin = await getAdminSession();
 
-  if (!session?.value) {
+  if (!admin || admin.rol !== 'administrador') {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
   }
 

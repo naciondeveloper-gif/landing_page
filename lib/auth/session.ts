@@ -4,11 +4,12 @@ import { supabase } from '@/lib/supabase/client';
 export interface AdminSession {
   id: string;
   username: string;
+  rol: 'administrador' | 'vendedor';
 }
 
 /**
  * Validates the session cookie against the sessions table.
- * Returns the admin user or null if invalid/expired.
+ * Returns the logged-in user (administrador or vendedor) or null if invalid/expired.
  * Requires the sessions table — run the migration in Supabase before deploying.
  */
 export async function getAdminSession(): Promise<AdminSession | null> {
@@ -32,7 +33,7 @@ export async function getAdminSession(): Promise<AdminSession | null> {
     .limit(1);
 
   const user = userData?.[0];
-  if (!user || user.rol !== 'administrador') return null;
+  if (!user || (user.rol !== 'administrador' && user.rol !== 'vendedor')) return null;
 
-  return { id: String(user.id), username: user.username };
+  return { id: String(user.id), username: user.username, rol: user.rol };
 }

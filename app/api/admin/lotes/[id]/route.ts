@@ -15,7 +15,7 @@ export async function PATCH(
 ) {
   try {
     const admin = await getAdminSession();
-    if (!admin) {
+    if (!admin || admin.rol !== 'administrador') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
     }
 

@@ -5,7 +5,7 @@ import { getAdminSession } from '@/lib/auth/session';
 export async function GET() {
   try {
     const admin = await getAdminSession();
-    if (!admin) {
+    if (!admin || admin.rol !== 'administrador') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
     }
 
@@ -26,7 +26,7 @@ export async function GET() {
 export async function DELETE(request: Request) {
   try {
     const admin = await getAdminSession();
-    if (!admin) {
+    if (!admin || admin.rol !== 'administrador') {
       return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
     }
 
