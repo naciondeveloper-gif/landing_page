@@ -8,6 +8,7 @@ import ModeloVivienda  from "@/features/landing/components/ModeloVivienda";
 import SobreProyecto   from "@/features/landing/components/SobreProyecto";
 import Amenidades   from "@/features/landing/components/Amenidades";
 import Brochure     from "@/features/landing/components/Brochure";
+import Calculadora  from "@/features/landing/components/Calculadora";
 import Ubicacion    from "@/features/landing/components/Ubicacion";
 import FAQ          from "@/features/landing/components/FAQ";
 import Footer       from "@/shared/components/layout/Footer";
@@ -76,6 +77,7 @@ export default function Home() {
       </section>
       <Amenidades />
       <Brochure />
+      <Calculadora />
       <div id="faq"><FAQ /></div>
       <Footer />
       <WhatsAppButton />

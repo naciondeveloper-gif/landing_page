@@ -28,6 +28,7 @@ export default function Navbar() {
             <Link href="#inicio"    className="text-secondary border-b-2 border-secondary pb-1 text-body-md">Proyecto</Link>
             <Link href="#nosotros"  className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Sobre Nosotros</Link>
             <Link href="#mapa"      className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Planos</Link>
+            <Link href="#calculadora" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Calculadora</Link>
             <Link href="#contacto"  className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Contacto</Link>
           </div>
 
@@ -77,6 +78,7 @@ export default function Navbar() {
                 <Link href="#inicio"   onClick={() => setMenuOpen(false)} className="text-on-surface text-body-md py-1 hover:text-secondary">Proyecto</Link>
                 <Link href="#nosotros" onClick={() => setMenuOpen(false)} className="text-on-surface text-body-md py-1 hover:text-secondary">Sobre Nosotros</Link>
                 <Link href="#mapa"     onClick={() => setMenuOpen(false)} className="text-on-surface text-body-md py-1 hover:text-secondary">Planos</Link>
+                <Link href="#calculadora" onClick={() => setMenuOpen(false)} className="text-on-surface text-body-md py-1 hover:text-secondary">Calculadora</Link>
                 <Link href="#contacto" onClick={() => setMenuOpen(false)} className="text-on-surface text-body-md py-1 hover:text-secondary">Contacto</Link>
                 <div className="flex gap-3 pt-2 border-t border-outline-variant/20">
                   <Link href="#mapa"  onClick={() => setMenuOpen(false)} className="flex-1 text-center bg-primary-container text-primary py-2.5 rounded-lg text-body-md font-semibold">Reservar</Link>
