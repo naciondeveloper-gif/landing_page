@@ -24,12 +24,12 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex gap-8 items-center">
-            <Link href="#inicio"    className="text-secondary border-b-2 border-secondary pb-1 text-body-md">Proyecto</Link>
-            <Link href="#nosotros"  className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Sobre Nosotros</Link>
-            <Link href="#mapa"      className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Planos</Link>
-            <Link href="#calculadora" className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Calculadora</Link>
-            <Link href="#contacto"  className="text-on-surface-variant hover:text-secondary transition-colors text-body-md">Contacto</Link>
+          <div className="hidden lg:flex gap-6 items-center">
+            <Link href="#inicio"    className="text-secondary border-b-2 border-secondary pb-1 text-sm">Proyecto</Link>
+            <Link href="#nosotros"  className="text-on-surface-variant hover:text-secondary transition-colors text-sm">Sobre Nosotros</Link>
+            <Link href="#mapa"      className="text-on-surface-variant hover:text-secondary transition-colors text-sm">Planos</Link>
+            <Link href="#calculadora" className="text-on-surface-variant hover:text-secondary transition-colors text-sm">Calculadora</Link>
+            <Link href="#contacto"  className="text-on-surface-variant hover:text-secondary transition-colors text-sm">Contacto</Link>
           </div>
 
           {/* CTAs */}

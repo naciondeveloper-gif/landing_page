@@ -75,9 +75,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Calculadora />
       <Amenidades />
       <Brochure />
-      <Calculadora />
       <div id="faq"><FAQ /></div>
       <Footer />
       <WhatsAppButton />
