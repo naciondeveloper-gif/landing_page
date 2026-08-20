@@ -12,15 +12,15 @@ const baseSlides: Slide[] = [
 
 const ampliacionSlides: Slide[] = [
   { src: '/Diapositivacorta2.JPG', alt: 'Fachada del modelo de vivienda con ampliación', caption: 'Fachada con Ampliación' },
-  { src: '/Diapositiva5.JPG',      alt: 'Distribución ampliación - 1er nivel', caption: '1er Nivel · 50.28 m²' },
-  { src: '/Diapositiva6.JPG',      alt: 'Distribución ampliación - 2do nivel', caption: '2do Nivel · 51.88 m²' },
+  { src: '/Diapositiva5.JPG',      alt: 'Distribución ampliación - 1er nivel', caption: '1er Nivel · 51.59 m²' },
+  { src: '/Diapositiva6.JPG',      alt: 'Distribución ampliación - 2do nivel', caption: '2do Nivel · 47.68 m²' },
 ];
 
 const areas = [
   { label: 'Área inicial',    value: '37.60' },
-  { label: 'Ampliación 1er nivel', value: '12.68' },
-  { label: 'Total 1er nivel', value: '50.28' },
-  { label: 'Total 2do nivel', value: '51.88' },
+  { label: 'Ampliación 1er nivel', value: '13.99' },
+  { label: 'Total 1er nivel', value: '51.59' },
+  { label: 'Total 2do nivel', value: '47.68' },
 ];
 
 function Carousel({ slides }: { slides: Slide[] }) {
@@ -126,7 +126,7 @@ export default function ModeloVivienda() {
                   />
                 )}
                 <span className={tab === t ? 'text-on-secondary' : 'text-on-surface-variant'}>
-                  {t === 'base' ? 'Modelo Base · 37.60 m²' : 'Con Ampliación · 101.56 m²'}
+                  {t === 'base' ? 'Modelo Base · 37.60 m²' : 'Con Ampliación · 99.27 m²'}
                 </span>
               </button>
             ))}
@@ -170,7 +170,7 @@ export default function ModeloVivienda() {
                 </div>
                 <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-4 flex items-center justify-between">
                   <span className="text-title-md text-secondary">Total techada</span>
-                  <span className="text-headline-lg font-extrabold text-secondary">101.56 m²</span>
+                  <span className="text-headline-lg font-extrabold text-secondary">99.27 m²</span>
                 </div>
               </>
             )}

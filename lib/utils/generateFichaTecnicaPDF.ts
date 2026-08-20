@@ -12,7 +12,7 @@ const specs = [
   { label: 'Habitaciones',      value: '2 dormitorios' },
   { label: 'Baños',             value: '1 baño completo' },
   { label: 'Área de Terreno',   value: '90 m²' },
-  { label: 'Área Techada',      value: '35 m²' },
+  { label: 'Área Techada',      value: '37.60 m²' },
   { label: 'Total de Lotes',    value: '309 unidades' },
 ];
 

@@ -105,7 +105,7 @@ export default function Hero() {
             <div className="space-y-4 border-t border-outline-variant/30 pt-6">
               {[
                 { label: 'Área Terreno',  value: '90 m²' },
-                { label: 'Área Techada',  value: '35 m²' },
+                { label: 'Área Techada',  value: '37.60 m²' },
                 { label: 'Ubicación',     value: 'KM 52 Pan. Sur - Lima' },
               ].map((r) => (
                 <div key={r.label} className="flex justify-between text-body-md">
